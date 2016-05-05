@@ -1,5 +1,5 @@
 //
-//  Schedule+CoreDataProperties.swift
+//  Person+CoreDataProperties.swift
 //  NextEpisode
 //
 //  Created by Andela on 5/5/16.
@@ -12,9 +12,11 @@
 import Foundation
 import CoreData
 
-extension Schedule {
+extension Person {
 
-    @NSManaged var days: String?
-    @NSManaged var time: String?
+    @NSManaged var personID: NSNumber?
+    @NSManaged var url: String?
+    @NSManaged var name: String?
+    @NSManaged var image: String?
 
 }

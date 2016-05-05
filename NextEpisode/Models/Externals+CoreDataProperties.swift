@@ -2,7 +2,7 @@
 //  Externals+CoreDataProperties.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/4/16.
+//  Created by Andela on 5/5/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,8 +14,8 @@ import CoreData
 
 extension Externals {
 
-    @NSManaged var tvrage: NSNumber?
-    @NSManaged var thetvdb: NSNumber?
     @NSManaged var imdb: String?
+    @NSManaged var thetvdb: NSNumber?
+    @NSManaged var tvrage: NSNumber?
 
 }

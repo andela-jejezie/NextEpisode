@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1807" minimumToolsVersion="Xcode 7.0">
+    <entity name="Cast" representedClassName=".Cast" syncable="YES">
+        <relationship name="character" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Character" representedClassName=".Character" syncable="YES">
+        <attribute name="characterID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Country" representedClassName=".Country" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,10 +20,11 @@
         <attribute name="airtime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="episode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="episodeID" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString="New Episode" syncable="YES"/>
         <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="season" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="show" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
     </entity>
@@ -25,6 +36,13 @@
     <entity name="Network" representedClassName=".Network" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="networkID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName=".Person" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Rating" representedClassName=".Rating" syncable="YES">
         <attribute name="average" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -35,12 +53,16 @@
     </entity>
     <entity name="Show" representedClassName=".Show" syncable="YES">
         <attribute name="genres" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="premiered" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="showID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cast" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cast" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" syncable="YES"/>
         <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="show" inverseEntity="Episode" syncable="YES"/>
         <relationship name="external" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Externals" syncable="YES"/>
@@ -55,13 +77,16 @@
         <attribute name="showLink" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Episode" positionX="-270" positionY="-126" width="128" height="193"/>
-        <element name="Show" positionX="-18" positionY="-261" width="128" height="253"/>
-        <element name="Schedule" positionX="9" positionY="54" width="128" height="73"/>
-        <element name="Rating" positionX="27" positionY="72" width="128" height="58"/>
-        <element name="Network" positionX="45" positionY="90" width="128" height="73"/>
-        <element name="Externals" positionX="0" positionY="45" width="128" height="88"/>
-        <element name="ShowLinks" positionX="9" positionY="54" width="128" height="88"/>
+        <element name="Cast" positionX="-81" positionY="-81" width="128" height="75"/>
+        <element name="Character" positionX="-54" positionY="-54" width="128" height="105"/>
         <element name="Country" positionX="18" positionY="90" width="128" height="88"/>
+        <element name="Episode" positionX="-270" positionY="-126" width="128" height="210"/>
+        <element name="Externals" positionX="0" positionY="45" width="128" height="88"/>
+        <element name="Network" positionX="45" positionY="90" width="128" height="90"/>
+        <element name="Person" positionX="-63" positionY="-63" width="128" height="105"/>
+        <element name="Rating" positionX="27" positionY="72" width="128" height="58"/>
+        <element name="Schedule" positionX="9" positionY="54" width="128" height="73"/>
+        <element name="Show" positionX="-18" positionY="-261" width="128" height="315"/>
+        <element name="ShowLinks" positionX="9" positionY="54" width="128" height="88"/>
     </elements>
 </model>

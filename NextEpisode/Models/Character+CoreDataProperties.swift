@@ -1,5 +1,5 @@
 //
-//  Schedule+CoreDataProperties.swift
+//  Character+CoreDataProperties.swift
 //  NextEpisode
 //
 //  Created by Andela on 5/5/16.
@@ -12,9 +12,11 @@
 import Foundation
 import CoreData
 
-extension Schedule {
+extension Character {
 
-    @NSManaged var days: String?
-    @NSManaged var time: String?
+    @NSManaged var characterID: NSNumber?
+    @NSManaged var image: String?
+    @NSManaged var name: String?
+    @NSManaged var url: String?
 
 }
