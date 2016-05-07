@@ -11,19 +11,26 @@ import CoreData
 
 
 class Character: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-        context: NSManagedObjectContext) -> Character {
-            let character = NSEntityDescription.insertNewObjectForEntityForName("Character",
-                inManagedObjectContext: context) as! Character
-            character.characterID = dictionary["id"] as? NSNumber
-            character.name = dictionary["name"] as? String
-            character.url = dictionary["url"] as? String
-            if let imageDict = dictionary["image"] as? [String:String] {
-                let imageString = imageDict["medium"]
-                character.image = CDHelper.documentsPathForFileName(imageString!)
-            }
-            return character
+                           context: NSManagedObjectContext) -> Character {
+        let character = NSEntityDescription.insertNewObjectForEntityForName("Character",
+                                                                            inManagedObjectContext: context) as! Character
+        if let characterID = dictionary["id"] as? NSNumber {
+            character.characterID = characterID
+        }
+        if let name = dictionary["name"] as? String {
+            character.name = name
+        }
+        if let url = dictionary["url"] as? String {
+            character.url = url
+        }
+        
+        if let imageDict = dictionary["image"] as? [String:String] {
+            let imageString = imageDict["medium"]
+            character.image = imageString
+        }
+        return character
     }
 }

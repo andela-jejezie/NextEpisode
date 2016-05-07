@@ -11,15 +11,21 @@ import CoreData
 
 
 class Network: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-        context: NSManagedObjectContext) -> Network {
-            let network = NSEntityDescription.insertNewObjectForEntityForName("Network",
-                inManagedObjectContext: context) as! Network
-            network.networkID = dictionary["id"] as? NSNumber
-            network.name = dictionary["name"] as? String
-            network.country = Country.newInstance(dictionary["country"] as! [String:AnyObject], context: context)
-            return network
+                           context: NSManagedObjectContext) -> Network {
+        let network = NSEntityDescription.insertNewObjectForEntityForName("Network",
+                                                                          inManagedObjectContext: context) as! Network
+        if let networkID = dictionary["id"] as? NSNumber {
+            network.networkID = networkID
+        }
+        if let name = dictionary["name"] as? String {
+            network.name = name
+        }
+        if let dict = dictionary["country"] as? [String:AnyObject] {
+            network.country = Country.newInstance(dict, context: context)
+        }
+        return network
     }
 }

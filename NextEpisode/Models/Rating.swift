@@ -11,15 +11,15 @@ import CoreData
 
 
 class Rating: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-        context: NSManagedObjectContext) -> Rating {
-            let rating = NSEntityDescription.insertNewObjectForEntityForName("Rating",
-                inManagedObjectContext: context) as! Rating
-            if let average = dictionary["average"] as? NSNumber {
-                rating.average = average
-            }
-            return rating
+                           context: NSManagedObjectContext) -> Rating {
+        let rating = NSEntityDescription.insertNewObjectForEntityForName("Rating",
+                                                                         inManagedObjectContext: context) as! Rating
+        if let average = dictionary["average"] as? NSNumber {
+            rating.average = average
+        }
+        return rating
     }
 }

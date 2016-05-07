@@ -16,6 +16,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 private let _sharedCDHelper = CDHelper()
 class CDHelper : NSObject  {
@@ -124,12 +125,12 @@ class CDHelper : NSObject  {
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter.dateFromString(date)!
     }
-    class func documentsPathForFileName(name:String)->String {
-        let data = NSData(contentsOfURL: NSURL(string: name)!)
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentPath = path[0]
-        let filePath = documentPath.stringByAppendingString(name)
-        data?.writeToFile(filePath, atomically: true)
-        return filePath
+    class func dateToString(date:NSDate)->String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd-MM-YYYY"
+        return dateFormatter.stringFromDate(date)
+    }
+    class func formatString(text:String)->String {
+       return text.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "").stringByReplacingOccurrencesOfString("<em>", withString: "").stringByReplacingOccurrencesOfString("</em>", withString: "").stringByReplacingOccurrencesOfString("<i>", withString: "").stringByReplacingOccurrencesOfString("</strong>", withString: "").stringByReplacingOccurrencesOfString("<strong>", withString: "").stringByReplacingOccurrencesOfString("<br>", withString: "").stringByReplacingOccurrencesOfString("</br>", withString: "")
     }
 }

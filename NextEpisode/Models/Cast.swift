@@ -11,14 +11,20 @@ import CoreData
 
 
 class Cast: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-        context: NSManagedObjectContext) -> Cast {
-            let cast = NSEntityDescription.insertNewObjectForEntityForName("Cast",
-                inManagedObjectContext: context) as! Cast
-            cast.person = Person.newInstance(dictionary["person"] as! [String:AnyObject], context: context)
-            cast.character = Character.newInstance(dictionary["character"] as! [String:AnyObject], context: context)
-            return cast
+                           context: NSManagedObjectContext) -> Cast {
+        let cast = NSEntityDescription.insertNewObjectForEntityForName("Cast",
+                                                                       inManagedObjectContext: context) as! Cast
+        if let person = dictionary["person"] as? [String:AnyObject] {
+            cast.person = Person.newInstance(person, context: context)
+        }
+        if let character = dictionary["character"] as? [String:AnyObject] {
+            cast.character = Character.newInstance(character, context: context)
+        }
+        
+        
+        return cast
     }
 }

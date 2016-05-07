@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4A96341CDDE841009FF81A /* NEEpisodeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A96331CDDE841009FF81A /* NEEpisodeDetailVC.swift */; };
+		1F4A96361CDDEA87009FF81A /* Episode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4A96351CDDEA87009FF81A /* Episode.storyboard */; };
 		1FBBFE3B1CDA338900199AFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFE3A1CDA338900199AFE /* AppDelegate.swift */; };
 		1FBBFE3D1CDA338900199AFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFE3C1CDA338900199AFE /* ViewController.swift */; };
 		1FBBFE401CDA338900199AFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FBBFE3E1CDA338900199AFE /* Main.storyboard */; };
@@ -41,6 +43,15 @@
 		1FBBFF4A1CDB184900199AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF341CDB184900199AFE /* Rating.swift */; };
 		1FBBFF4B1CDB184900199AFE /* ShowLinks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF351CDB184900199AFE /* ShowLinks+CoreDataProperties.swift */; };
 		1FBBFF4C1CDB184900199AFE /* ShowLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF361CDB184900199AFE /* ShowLinks.swift */; };
+		1FBBFF561CDC6B4A00199AFE /* NEGenericVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF551CDC6B4A00199AFE /* NEGenericVC.swift */; };
+		1FBBFF5C1CDC6EF200199AFE /* CDTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF5B1CDC6EF200199AFE /* CDTableViewController.swift */; };
+		1FBBFF5E1CDC6FB300199AFE /* TodayEpisodesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF5D1CDC6FB300199AFE /* TodayEpisodesVC.swift */; };
+		1FBBFF651CDC720800199AFE /* NEEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBBFF631CDC720800199AFE /* NEEpisodeTableViewCell.swift */; };
+		1FBBFF661CDC720800199AFE /* NEEpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBBFF641CDC720800199AFE /* NEEpisodeTableViewCell.xib */; };
+		1FC37E821CDE0C8F00EFF605 /* Show.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37E811CDE0C8F00EFF605 /* Show.storyboard */; };
+		1FC37E841CDE0CC800EFF605 /* NEShowDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */; };
+		1FC37E871CDE12A400EFF605 /* NECastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */; };
+		45FDD2BE372F0FA719F81C76 /* Pods_NextEpisode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F4A96331CDDE841009FF81A /* NEEpisodeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEEpisodeDetailVC.swift; sourceTree = "<group>"; };
+		1F4A96351CDDEA87009FF81A /* Episode.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Episode.storyboard; sourceTree = "<group>"; };
 		1FBBFE371CDA338900199AFE /* NextEpisode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextEpisode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FBBFE3A1CDA338900199AFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FBBFE3C1CDA338900199AFE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +117,18 @@
 		1FBBFF361CDB184900199AFE /* ShowLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowLinks.swift; sourceTree = "<group>"; };
 		1FBBFF4D1CDB1ED500199AFE /* TVSeries 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 3.xcdatamodel"; sourceTree = "<group>"; };
 		1FBBFF4E1CDB224500199AFE /* TVSeries 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 4.xcdatamodel"; sourceTree = "<group>"; };
+		1FBBFF551CDC6B4A00199AFE /* NEGenericVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEGenericVC.swift; sourceTree = "<group>"; };
+		1FBBFF5B1CDC6EF200199AFE /* CDTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDTableViewController.swift; sourceTree = "<group>"; };
+		1FBBFF5D1CDC6FB300199AFE /* TodayEpisodesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayEpisodesVC.swift; sourceTree = "<group>"; };
+		1FBBFF631CDC720800199AFE /* NEEpisodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		1FBBFF641CDC720800199AFE /* NEEpisodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEEpisodeTableViewCell.xib; sourceTree = "<group>"; };
+		1FC37E811CDE0C8F00EFF605 /* Show.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Show.storyboard; sourceTree = "<group>"; };
+		1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEShowDetailsVC.swift; sourceTree = "<group>"; };
+		1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NECastCollectionViewCell.swift; sourceTree = "<group>"; };
+		1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 5.xcdatamodel"; sourceTree = "<group>"; };
+		7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextEpisode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.release.xcconfig"; sourceTree = "<group>"; };
+		9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FBBFE6D1CDA348200199AFE /* CoreData.framework in Frameworks */,
+				45FDD2BE372F0FA719F81C76 /* Pods_NextEpisode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +158,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F4A96321CDDE7D9009FF81A /* Episode Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				1F4A96331CDDE841009FF81A /* NEEpisodeDetailVC.swift */,
+				1F4A96351CDDEA87009FF81A /* Episode.storyboard */,
+			);
+			path = "Episode Detail View";
+			sourceTree = "<group>";
+		};
 		1FBBFE2E1CDA338900199AFE = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +175,8 @@
 				1FBBFE4E1CDA338900199AFE /* NextEpisodeTests */,
 				1FBBFE591CDA338900199AFE /* NextEpisodeUITests */,
 				1FBBFE381CDA338900199AFE /* Products */,
+				D4B3D1CD44B99109A19925BA /* Pods */,
+				7ECA29DA01E385CF21860E84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +193,7 @@
 		1FBBFE391CDA338900199AFE /* NextEpisode */ = {
 			isa = PBXGroup;
 			children = (
+				1FBBFF4F1CDC69FD00199AFE /* Lib */,
 				1FBBFE981CDA460400199AFE /* Utils */,
 				1FBBFE6B1CDA347300199AFE /* API */,
 				1FBBFE6A1CDA346400199AFE /* Data Models */,
@@ -222,6 +260,7 @@
 		1FBBFE691CDA343F00199AFE /* CDHelper Class */ = {
 			isa = PBXGroup;
 			children = (
+				1FBBFF5A1CDC6ED600199AFE /* CDBaseTableViewController */,
 				1FBBFE911CDA447D00199AFE /* CDHelper.swift */,
 			);
 			path = "CDHelper Class";
@@ -246,6 +285,10 @@
 		1FBBFE931CDA454800199AFE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37E801CDE0C7100EFF605 /* Show Detail VC */,
+				1F4A96321CDDE7D9009FF81A /* Episode Detail View */,
+				1FBBFF5F1CDC71BC00199AFE /* Custom Objects */,
+				1FBBFF571CDC6B8200199AFE /* Todays Episode VC */,
 				1FBBFE941CDA454800199AFE /* Generic VC */,
 			);
 			path = UI;
@@ -254,6 +297,7 @@
 		1FBBFE941CDA454800199AFE /* Generic VC */ = {
 			isa = PBXGroup;
 			children = (
+				1FBBFF551CDC6B4A00199AFE /* NEGenericVC.swift */,
 			);
 			path = "Generic VC";
 			sourceTree = "<group>";
@@ -282,6 +326,97 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		1FBBFF4F1CDC69FD00199AFE /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1FBBFF571CDC6B8200199AFE /* Todays Episode VC */ = {
+			isa = PBXGroup;
+			children = (
+				1FBBFF5D1CDC6FB300199AFE /* TodayEpisodesVC.swift */,
+			);
+			path = "Todays Episode VC";
+			sourceTree = "<group>";
+		};
+		1FBBFF5A1CDC6ED600199AFE /* CDBaseTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1FBBFF5B1CDC6EF200199AFE /* CDTableViewController.swift */,
+			);
+			path = CDBaseTableViewController;
+			sourceTree = "<group>";
+		};
+		1FBBFF5F1CDC71BC00199AFE /* Custom Objects */ = {
+			isa = PBXGroup;
+			children = (
+				1FBBFF601CDC71BC00199AFE /* TableViewCells */,
+			);
+			path = "Custom Objects";
+			sourceTree = "<group>";
+		};
+		1FBBFF601CDC71BC00199AFE /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1FBBFF611CDC71BC00199AFE /* EpisodeTableViewCelll */,
+				1FBBFF621CDC71BC00199AFE /* ShowTableViewCell */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		1FBBFF611CDC71BC00199AFE /* EpisodeTableViewCelll */ = {
+			isa = PBXGroup;
+			children = (
+				1FBBFF631CDC720800199AFE /* NEEpisodeTableViewCell.swift */,
+				1FBBFF641CDC720800199AFE /* NEEpisodeTableViewCell.xib */,
+			);
+			path = EpisodeTableViewCelll;
+			sourceTree = "<group>";
+		};
+		1FBBFF621CDC71BC00199AFE /* ShowTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShowTableViewCell;
+			sourceTree = "<group>";
+		};
+		1FC37E801CDE0C7100EFF605 /* Show Detail VC */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37E851CDE128C00EFF605 /* Cast Collection Cell */,
+				1FC37E811CDE0C8F00EFF605 /* Show.storyboard */,
+				1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */,
+			);
+			path = "Show Detail VC";
+			sourceTree = "<group>";
+		};
+		1FC37E851CDE128C00EFF605 /* Cast Collection Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */,
+			);
+			path = "Cast Collection Cell";
+			sourceTree = "<group>";
+		};
+		7ECA29DA01E385CF21860E84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4B3D1CD44B99109A19925BA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */,
+				878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -289,9 +424,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FBBFE5F1CDA338900199AFE /* Build configuration list for PBXNativeTarget "NextEpisode" */;
 			buildPhases = (
+				A54601CFF1865ECAAF928976 /* Check Pods Manifest.lock */,
 				1FBBFE331CDA338900199AFE /* Sources */,
 				1FBBFE341CDA338900199AFE /* Frameworks */,
 				1FBBFE351CDA338900199AFE /* Resources */,
+				705B6682DE6916FF4A44C9DF /* Embed Pods Frameworks */,
+				079CC38A34AC183E0EB3C66C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -387,7 +525,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FBBFE451CDA338900199AFE /* LaunchScreen.storyboard in Resources */,
+				1FC37E821CDE0C8F00EFF605 /* Show.storyboard in Resources */,
+				1F4A96361CDDEA87009FF81A /* Episode.storyboard in Resources */,
 				1FBBFE421CDA338900199AFE /* Assets.xcassets in Resources */,
+				1FBBFF661CDC720800199AFE /* NEEpisodeTableViewCell.xib in Resources */,
 				1FBBFE401CDA338900199AFE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,21 +549,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		079CC38A34AC183E0EB3C66C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		705B6682DE6916FF4A44C9DF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A54601CFF1865ECAAF928976 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1FBBFE331CDA338900199AFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1FBBFE9B1CDA463900199AFE /* Constants.swift in Sources */,
+				1FC37E871CDE12A400EFF605 /* NECastCollectionViewCell.swift in Sources */,
+				1FC37E841CDE0CC800EFF605 /* NEShowDetailsVC.swift in Sources */,
 				1FBBFF411CDB184900199AFE /* Cast+CoreDataProperties.swift in Sources */,
 				1FBBFF451CDB184900199AFE /* Country+CoreDataProperties.swift in Sources */,
 				1FBBFF3B1CDB184900199AFE /* Show+CoreDataProperties.swift in Sources */,
+				1FBBFF5C1CDC6EF200199AFE /* CDTableViewController.swift in Sources */,
 				1FBBFF401CDB184900199AFE /* Network.swift in Sources */,
+				1FBBFF5E1CDC6FB300199AFE /* TodayEpisodesVC.swift in Sources */,
 				1FBBFF381CDB184900199AFE /* Episode.swift in Sources */,
 				1FBBFE3D1CDA338900199AFE /* ViewController.swift in Sources */,
+				1FBBFF561CDC6B4A00199AFE /* NEGenericVC.swift in Sources */,
 				1FBBFF391CDB184900199AFE /* Schedule+CoreDataProperties.swift in Sources */,
 				1FBBFF3D1CDB184900199AFE /* Externals+CoreDataProperties.swift in Sources */,
+				1F4A96341CDDE841009FF81A /* NEEpisodeDetailVC.swift in Sources */,
 				1FBBFF491CDB184900199AFE /* Rating+CoreDataProperties.swift in Sources */,
+				1FBBFF651CDC720800199AFE /* NEEpisodeTableViewCell.swift in Sources */,
 				1FBBFF371CDB184900199AFE /* Episode+CoreDataProperties.swift in Sources */,
 				1FBBFF3C1CDB184900199AFE /* Show.swift in Sources */,
 				1FBBFF4A1CDB184900199AFE /* Rating.swift in Sources */,
@@ -580,19 +776,24 @@
 		};
 		1FBBFE601CDA338900199AFE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NextEpisode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnsonejezie.NextEpisode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1FBBFE611CDA338900199AFE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NextEpisode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnsonejezie.NextEpisode;
@@ -667,6 +868,7 @@
 				1FBBFE611CDA338900199AFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1FBBFE621CDA338900199AFE /* Build configuration list for PBXNativeTarget "NextEpisodeTests" */ = {
 			isa = XCConfigurationList;
@@ -675,6 +877,7 @@
 				1FBBFE641CDA338900199AFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1FBBFE651CDA338900199AFE /* Build configuration list for PBXNativeTarget "NextEpisodeUITests" */ = {
 			isa = XCConfigurationList;
@@ -683,6 +886,7 @@
 				1FBBFE671CDA338900199AFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -690,12 +894,13 @@
 		1FBBFE6E1CDA34AC00199AFE /* TVSeries.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */,
 				1FBBFF4E1CDB224500199AFE /* TVSeries 4.xcdatamodel */,
 				1FBBFF4D1CDB1ED500199AFE /* TVSeries 3.xcdatamodel */,
 				1FBBFE9C1CDAF52F00199AFE /* TVSeries 2.xcdatamodel */,
 				1FBBFE6F1CDA34AC00199AFE /* TVSeries.xcdatamodel */,
 			);
-			currentVersion = 1FBBFF4E1CDB224500199AFE /* TVSeries 4.xcdatamodel */;
+			currentVersion = 1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */;
 			path = TVSeries.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
