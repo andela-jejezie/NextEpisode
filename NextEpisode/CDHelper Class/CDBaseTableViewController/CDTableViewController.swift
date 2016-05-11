@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CDTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class CDTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
     // MARK: - INITIALIZATION
     required init?(coder aDecoder: NSCoder) {
@@ -21,6 +21,21 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     
         // Use self.frc.objectAtIndexPath(indexPath) to get an object specific to a cell in the subclasses
         print("Please override configureCell in \(#function)!")
+    }
+    
+    //MARK: - Configure search
+    func configureSearch() {
+        self.searchController = UISearchController(searchResultsController: nil)
+        if let _searchController = self.searchController {
+            _searchController.delegate = self
+            _searchController.searchResultsUpdater = self
+            _searchController.dimsBackgroundDuringPresentation = false
+            _searchController.searchBar.delegate = self
+            _searchController.searchBar.sizeToFit()
+            self.tableView.tableHeaderView = _searchController.searchBar
+        }else {
+            print("error configuring _searchcontroller in %@", #function)
+        }
     }
     
     // Override
@@ -36,6 +51,7 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     var cellIdentifier = "Cell"
     var isEpisode = true
     
+    var searchController:UISearchController? = nil
     let episcodeCellIdentifier = "NEEpisodeTableViewCell"
     
     // MARK: - FETCHED RESULTS CONTROLLER
@@ -55,6 +71,12 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
         return newFRC
     }()
     
+    //MARK: - RELOADFRC
+    func reloadFRC (predicate:NSPredicate?) {
+        self.filter = predicate
+        self.frc.fetchRequest.predicate = predicate
+        self.performFetch()
+    }
     // MARK: - FETCHING
     func performFetch () {
         self.frc.managedObjectContext.performBlock ({
@@ -117,6 +139,22 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 510
+    }
+    
+    // MARK: -  DELEGATE: UISearchController
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchBarText = searchController.searchBar.text {
+            var predicate:NSPredicate?
+            if searchBarText != "" {
+                predicate = NSPredicate(format: "show.name contains[cd] %@",searchBarText)
+                self.reloadFRC(predicate)
+            }
+        }
+    }
+    // MARK: -  DELEGATE: UISearchBar
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.reloadFRC(nil)
     }
     
     // MARK: - DELEGATE: NSFetchedResultsController

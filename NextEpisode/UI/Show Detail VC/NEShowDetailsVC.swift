@@ -45,9 +45,27 @@ class NEShowDetailsVC: UIViewController, UICollectionViewDataSource, UICollectio
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NECastCollectionViewCell", forIndexPath: indexPath) as? NECastCollectionViewCell
         let cast = casts[indexPath.row]
-        
+        cell?.moreButton.tag = indexPath.row
+        cell?.moreButton.addTarget(self, action: #selector(NEShowDetailsVC.readMoreButtonClicked(_:)), forControlEvents: .TouchUpInside)
         cell?.configureCellForData(cast)
         return cell!
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("ShowDetailsToCastDetailsSegue", sender: nil)
+    }
+    func readMoreButtonClicked(sender:UIButton) {
+        let cast = casts[sender.tag]
+        UIApplication.sharedApplication().openURL(NSURL(string: (cast.person?.url!)!)!)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetailsToCastDetailsSegue" {
+            let targetVC = segue.destinationViewController as? NECastDetailVC
+            let indexPaths = self.collectionView.indexPathsForSelectedItems()
+            let indexPath = indexPaths![0]
+            let cast = casts[indexPath.row]
+            targetVC?.cast = cast
+        }
     }
 
 }

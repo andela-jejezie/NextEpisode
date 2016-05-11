@@ -51,6 +51,7 @@
 		1FC37E821CDE0C8F00EFF605 /* Show.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37E811CDE0C8F00EFF605 /* Show.storyboard */; };
 		1FC37E841CDE0CC800EFF605 /* NEShowDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */; };
 		1FC37E871CDE12A400EFF605 /* NECastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */; };
+		1FC37E8B1CE072E300EFF605 /* NECastDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */; };
 		45FDD2BE372F0FA719F81C76 /* Pods_NextEpisode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,7 @@
 		1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEShowDetailsVC.swift; sourceTree = "<group>"; };
 		1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NECastCollectionViewCell.swift; sourceTree = "<group>"; };
 		1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 5.xcdatamodel"; sourceTree = "<group>"; };
+		1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NECastDetailVC.swift; sourceTree = "<group>"; };
 		7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextEpisode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.release.xcconfig"; sourceTree = "<group>"; };
 		9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		1FBBFE931CDA454800199AFE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37E891CE072B100EFF605 /* Cast Detail VC */,
 				1FC37E801CDE0C7100EFF605 /* Show Detail VC */,
 				1F4A96321CDDE7D9009FF81A /* Episode Detail View */,
 				1FBBFF5F1CDC71BC00199AFE /* Custom Objects */,
@@ -398,6 +401,14 @@
 				1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */,
 			);
 			path = "Cast Collection Cell";
+			sourceTree = "<group>";
+		};
+		1FC37E891CE072B100EFF605 /* Cast Detail VC */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */,
+			);
+			path = "Cast Detail VC";
 			sourceTree = "<group>";
 		};
 		7ECA29DA01E385CF21860E84 /* Frameworks */ = {
@@ -611,6 +622,7 @@
 				1FBBFF5C1CDC6EF200199AFE /* CDTableViewController.swift in Sources */,
 				1FBBFF401CDB184900199AFE /* Network.swift in Sources */,
 				1FBBFF5E1CDC6FB300199AFE /* TodayEpisodesVC.swift in Sources */,
+				1FC37E8B1CE072E300EFF605 /* NECastDetailVC.swift in Sources */,
 				1FBBFF381CDB184900199AFE /* Episode.swift in Sources */,
 				1FBBFE3D1CDA338900199AFE /* ViewController.swift in Sources */,
 				1FBBFF561CDC6B4A00199AFE /* NEGenericVC.swift in Sources */,

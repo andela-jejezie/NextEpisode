@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayEpisodesVC: CDTableViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+class TodayEpisodesVC: CDTableViewController {
     
     
     // MARK: - INITIALIZATION
@@ -22,21 +22,12 @@ class TodayEpisodesVC: CDTableViewController, UISearchControllerDelegate, UISear
         self.fetchBatchSize = 20
         
     }
-    var searchController : UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController = UISearchController(searchResultsController:  nil)
         
-        self.searchController.searchResultsUpdater = self
-        self.searchController.delegate = self
-        self.searchController.searchBar.delegate = self
-        
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = true
-        
-        self.navigationItem.titleView = searchController.searchBar
-        
+      self.configureSearch()
         self.definesPresentationContext = true
     }
     
@@ -55,9 +46,7 @@ class TodayEpisodesVC: CDTableViewController, UISearchControllerDelegate, UISear
             (cell as! NEEpisodeTableViewCell).configureCellForEpisode(episode)
         }else {print("ERROR getting item in \(#function)")}
     }
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-    }
+
     func readMoreButtonClicked(sender:UIButton) {
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let episode = frc.objectAtIndexPath(indexPath) as? Episode
