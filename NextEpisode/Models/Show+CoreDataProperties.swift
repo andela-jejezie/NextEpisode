@@ -2,7 +2,7 @@
 //  Show+CoreDataProperties.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/7/16.
+//  Created by Andela on 5/13/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -24,6 +24,7 @@ extension Show {
     @NSManaged var status: String?
     @NSManaged var summary: String?
     @NSManaged var url: String?
+    @NSManaged var casts: NSSet?
     @NSManaged var country: Country?
     @NSManaged var episodes: NSSet?
     @NSManaged var external: Externals?
@@ -31,6 +32,5 @@ extension Show {
     @NSManaged var network: Network?
     @NSManaged var rating: Rating?
     @NSManaged var schedule: Schedule?
-    @NSManaged var casts: NSSet?
 
 }

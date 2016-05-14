@@ -31,6 +31,10 @@ class TodayEpisodesVC: CDTableViewController {
         self.definesPresentationContext = true
     }
     
+    override func viewWillAppear(animated: Bool) {
+//        NETodayEpisodesAPI.getTVSeriesScheduledTodayForCountryCode("", context: context)
+    }
+    
     // MARK: - VIEW
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

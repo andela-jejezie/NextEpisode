@@ -52,6 +52,13 @@
 		1FC37E841CDE0CC800EFF605 /* NEShowDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E831CDE0CC800EFF605 /* NEShowDetailsVC.swift */; };
 		1FC37E871CDE12A400EFF605 /* NECastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */; };
 		1FC37E8B1CE072E300EFF605 /* NECastDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */; };
+		1FC37E961CE3DA7E00EFF605 /* NEShowTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E951CE3DA7E00EFF605 /* NEShowTVC.swift */; };
+		1FC37E9B1CE454C900EFF605 /* NEShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E991CE454C900EFF605 /* NEShowTableViewCell.swift */; };
+		1FC37E9C1CE454C900EFF605 /* NEShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37E9A1CE454C900EFF605 /* NEShowTableViewCell.xib */; };
+		1FC37EA01CE5A13600EFF605 /* NESeasonEpisodeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37E9F1CE5A13600EFF605 /* NESeasonEpisodeTVC.swift */; };
+		1FC37EA31CE5C88700EFF605 /* NEWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37EA21CE5C88700EFF605 /* NEWebViewVC.swift */; };
+		1FC37EA51CE5C8AB00EFF605 /* WebViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37EA41CE5C8AB00EFF605 /* WebViewStoryboard.storyboard */; };
+		1FC37EA81CE717CE00EFF605 /* NEFavoriteShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37EA71CE717CE00EFF605 /* NEFavoriteShowVC.swift */; };
 		45FDD2BE372F0FA719F81C76 /* Pods_NextEpisode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +135,14 @@
 		1FC37E861CDE12A400EFF605 /* NECastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NECastCollectionViewCell.swift; sourceTree = "<group>"; };
 		1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 5.xcdatamodel"; sourceTree = "<group>"; };
 		1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NECastDetailVC.swift; sourceTree = "<group>"; };
+		1FC37E951CE3DA7E00EFF605 /* NEShowTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEShowTVC.swift; sourceTree = "<group>"; };
+		1FC37E991CE454C900EFF605 /* NEShowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEShowTableViewCell.swift; sourceTree = "<group>"; };
+		1FC37E9A1CE454C900EFF605 /* NEShowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEShowTableViewCell.xib; sourceTree = "<group>"; };
+		1FC37E9D1CE5816100EFF605 /* TVSeries 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TVSeries 6.xcdatamodel"; sourceTree = "<group>"; };
+		1FC37E9F1CE5A13600EFF605 /* NESeasonEpisodeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NESeasonEpisodeTVC.swift; sourceTree = "<group>"; };
+		1FC37EA21CE5C88700EFF605 /* NEWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEWebViewVC.swift; sourceTree = "<group>"; };
+		1FC37EA41CE5C8AB00EFF605 /* WebViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewStoryboard.storyboard; sourceTree = "<group>"; };
+		1FC37EA71CE717CE00EFF605 /* NEFavoriteShowVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NEFavoriteShowVC.swift; sourceTree = "<group>"; };
 		7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextEpisode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.release.xcconfig"; sourceTree = "<group>"; };
 		9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +302,10 @@
 		1FBBFE931CDA454800199AFE /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37EA61CE711ED00EFF605 /* Favorite VC */,
+				1FC37EA11CE5C72C00EFF605 /* WebView */,
+				1FC37E9E1CE5A0DB00EFF605 /* Season Episodes */,
+				1FC37E921CE3D9A800EFF605 /* show VC */,
 				1FC37E891CE072B100EFF605 /* Cast Detail VC */,
 				1FC37E801CDE0C7100EFF605 /* Show Detail VC */,
 				1F4A96321CDDE7D9009FF81A /* Episode Detail View */,
@@ -381,6 +400,8 @@
 		1FBBFF621CDC71BC00199AFE /* ShowTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37E991CE454C900EFF605 /* NEShowTableViewCell.swift */,
+				1FC37E9A1CE454C900EFF605 /* NEShowTableViewCell.xib */,
 			);
 			path = ShowTableViewCell;
 			sourceTree = "<group>";
@@ -409,6 +430,39 @@
 				1FC37E8A1CE072E300EFF605 /* NECastDetailVC.swift */,
 			);
 			path = "Cast Detail VC";
+			sourceTree = "<group>";
+		};
+		1FC37E921CE3D9A800EFF605 /* show VC */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37E951CE3DA7E00EFF605 /* NEShowTVC.swift */,
+			);
+			path = "show VC";
+			sourceTree = "<group>";
+		};
+		1FC37E9E1CE5A0DB00EFF605 /* Season Episodes */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37E9F1CE5A13600EFF605 /* NESeasonEpisodeTVC.swift */,
+			);
+			path = "Season Episodes";
+			sourceTree = "<group>";
+		};
+		1FC37EA11CE5C72C00EFF605 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37EA21CE5C88700EFF605 /* NEWebViewVC.swift */,
+				1FC37EA41CE5C8AB00EFF605 /* WebViewStoryboard.storyboard */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		1FC37EA61CE711ED00EFF605 /* Favorite VC */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37EA71CE717CE00EFF605 /* NEFavoriteShowVC.swift */,
+			);
+			path = "Favorite VC";
 			sourceTree = "<group>";
 		};
 		7ECA29DA01E385CF21860E84 /* Frameworks */ = {
@@ -536,9 +590,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FBBFE451CDA338900199AFE /* LaunchScreen.storyboard in Resources */,
+				1FC37E9C1CE454C900EFF605 /* NEShowTableViewCell.xib in Resources */,
 				1FC37E821CDE0C8F00EFF605 /* Show.storyboard in Resources */,
 				1F4A96361CDDEA87009FF81A /* Episode.storyboard in Resources */,
 				1FBBFE421CDA338900199AFE /* Assets.xcassets in Resources */,
+				1FC37EA51CE5C8AB00EFF605 /* WebViewStoryboard.storyboard in Resources */,
 				1FBBFF661CDC720800199AFE /* NEEpisodeTableViewCell.xib in Resources */,
 				1FBBFE401CDA338900199AFE /* Main.storyboard in Resources */,
 			);
@@ -622,14 +678,17 @@
 				1FBBFF5C1CDC6EF200199AFE /* CDTableViewController.swift in Sources */,
 				1FBBFF401CDB184900199AFE /* Network.swift in Sources */,
 				1FBBFF5E1CDC6FB300199AFE /* TodayEpisodesVC.swift in Sources */,
+				1FC37EA31CE5C88700EFF605 /* NEWebViewVC.swift in Sources */,
 				1FC37E8B1CE072E300EFF605 /* NECastDetailVC.swift in Sources */,
 				1FBBFF381CDB184900199AFE /* Episode.swift in Sources */,
 				1FBBFE3D1CDA338900199AFE /* ViewController.swift in Sources */,
 				1FBBFF561CDC6B4A00199AFE /* NEGenericVC.swift in Sources */,
 				1FBBFF391CDB184900199AFE /* Schedule+CoreDataProperties.swift in Sources */,
 				1FBBFF3D1CDB184900199AFE /* Externals+CoreDataProperties.swift in Sources */,
+				1FC37E9B1CE454C900EFF605 /* NEShowTableViewCell.swift in Sources */,
 				1F4A96341CDDE841009FF81A /* NEEpisodeDetailVC.swift in Sources */,
 				1FBBFF491CDB184900199AFE /* Rating+CoreDataProperties.swift in Sources */,
+				1FC37E961CE3DA7E00EFF605 /* NEShowTVC.swift in Sources */,
 				1FBBFF651CDC720800199AFE /* NEEpisodeTableViewCell.swift in Sources */,
 				1FBBFF371CDB184900199AFE /* Episode+CoreDataProperties.swift in Sources */,
 				1FBBFF3C1CDB184900199AFE /* Show.swift in Sources */,
@@ -644,7 +703,9 @@
 				1FBBFE3B1CDA338900199AFE /* AppDelegate.swift in Sources */,
 				1FBBFF3F1CDB184900199AFE /* Network+CoreDataProperties.swift in Sources */,
 				1FBBFF4B1CDB184900199AFE /* ShowLinks+CoreDataProperties.swift in Sources */,
+				1FC37EA01CE5A13600EFF605 /* NESeasonEpisodeTVC.swift in Sources */,
 				1FBBFF461CDB184900199AFE /* Country.swift in Sources */,
+				1FC37EA81CE717CE00EFF605 /* NEFavoriteShowVC.swift in Sources */,
 				1FBBFE701CDA34AC00199AFE /* TVSeries.xcdatamodeld in Sources */,
 				1FBBFF3A1CDB184900199AFE /* Schedule.swift in Sources */,
 				1FBBFE921CDA447D00199AFE /* CDHelper.swift in Sources */,
@@ -906,13 +967,14 @@
 		1FBBFE6E1CDA34AC00199AFE /* TVSeries.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1FC37E9D1CE5816100EFF605 /* TVSeries 6.xcdatamodel */,
 				1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */,
 				1FBBFF4E1CDB224500199AFE /* TVSeries 4.xcdatamodel */,
 				1FBBFF4D1CDB1ED500199AFE /* TVSeries 3.xcdatamodel */,
 				1FBBFE9C1CDAF52F00199AFE /* TVSeries 2.xcdatamodel */,
 				1FBBFE6F1CDA34AC00199AFE /* TVSeries.xcdatamodel */,
 			);
-			currentVersion = 1FC37E881CDE4F7B00EFF605 /* TVSeries 5.xcdatamodel */;
+			currentVersion = 1FC37E9D1CE5816100EFF605 /* TVSeries 6.xcdatamodel */;
 			path = TVSeries.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -46,7 +46,6 @@ class Show: NSManagedObject {
         if let runtime = dictionary["runtime"] as? NSNumber {
             show.runtime = runtime
         }
-        
         if let imageDict = dictionary["image"] as? [String:String] {
             let imageString = imageDict["original"]
             show.image = imageString
@@ -66,7 +65,6 @@ class Show: NSManagedObject {
         if let links = dictionary["_links"] as? [String:AnyObject] {
             show.link = ShowLinks.newInstance(links, context: context)
         }
-
         return show
     }
     

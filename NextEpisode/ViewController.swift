@@ -25,9 +25,7 @@ class ViewController: UIViewController {
         
         do {
             let result = try CDHelper.shared.context.executeFetchRequest(fetchRequest) as? [Show]
-            for show:Show in result! {
-                print("fetched result from core data \(show.network?.country?.timezone)")
-            }
+                print("fetched result from core data \(result?.count)")
         } catch {
             let fetchError = error as NSError
             print(fetchError)

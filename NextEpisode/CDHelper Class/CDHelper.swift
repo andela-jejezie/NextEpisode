@@ -20,11 +20,13 @@ import UIKit
 
 private let _sharedCDHelper = CDHelper()
 class CDHelper : NSObject  {
-    
+
     // MARK: - SHARED INSTANCE
     class var shared : CDHelper {
         return _sharedCDHelper
     }
+    
+    var arrayOfFavoriteID = [NSNumber]()
     
     // MARK: - PATHS
     lazy var storesDirectory: NSURL? = {
@@ -47,6 +49,8 @@ class CDHelper : NSObject  {
         print("CRITICAL - Managed Object Model file not found")
         abort()
     }()
+    
+    var selectedShow:Show!
     
     // MARK: - CONTEXT
     lazy var context: NSManagedObjectContext = {
@@ -85,23 +89,14 @@ class CDHelper : NSObject  {
         self.setupCoreData()
     }
     func setupCoreData() {
-        
-        /* // Model Migration
-        if let _localStoreURL = self.localStoreURL {
-        CDMigration.shared.migrateStoreIfNecessary(_localStoreURL, destinationModel: self.model)
-        } */
-        
         // Load Local Store
         _ = self.localStore
     }
     
     // MARK: - SAVING
     class func save(moc:NSManagedObjectContext) {
-        
         moc.performBlockAndWait {
-            
             if moc.hasChanges {
-                
                 do {
                     try moc.save()
                     print("SAVED context \(moc.description)")
@@ -119,6 +114,7 @@ class CDHelper : NSObject  {
     class func saveSharedContext() {
         save(shared.context)
     }
+
     
     class func stringToDate(date:String)->NSDate {
         let dateFormatter = NSDateFormatter()

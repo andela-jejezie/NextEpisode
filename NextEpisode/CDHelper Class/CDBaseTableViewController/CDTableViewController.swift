@@ -53,10 +53,10 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     
     var searchController:UISearchController? = nil
     let episcodeCellIdentifier = "NEEpisodeTableViewCell"
+    let showCellIdentifier = "NEShowTableViewCell"
     
     // MARK: - FETCHED RESULTS CONTROLLER
     lazy var frc: NSFetchedResultsController = {
-    
         let request = NSFetchRequest(entityName:self.entity)
         request.sortDescriptors = self.sort
         request.fetchBatchSize  = self.fetchBatchSize
@@ -93,15 +93,16 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: - VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NETodayEpisodesAPI.getTVSeriesScheduledTodayForCountryCode("")
         // Force fetch when notified of significant data changes
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CDTableViewController.performFetch), name: "SomethingChanged", object: nil)
         self.tableView.registerNib(UINib(nibName: "NEEpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: self.episcodeCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "NEShowTableViewCell", bundle: nil), forCellReuseIdentifier: self.showCellIdentifier)
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
-        
+
+    
     // MARK: - DEALLOCATION
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "performFetch", object: nil)
@@ -115,29 +116,39 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
         return self.frc.sections![section].numberOfObjects ?? 0
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:NEEpisodeTableViewCell?
-        if isEpisode {
-            cell = (tableView.dequeueReusableCellWithIdentifier(self.episcodeCellIdentifier) as? NEEpisodeTableViewCell)!
-            if cell == nil {
-                tableView.registerNib(UINib(nibName: "NEEpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: self.episcodeCellIdentifier)
-                cell = tableView.dequeueReusableCellWithIdentifier(self.episcodeCellIdentifier) as? NEEpisodeTableViewCell
-            }
-
-        }
         
-        self.configureCell(cell!, atIndexPath: indexPath)
-        return cell!
+        if isEpisode {
+            var cell:UITableViewCell?
+            cell = tableView.dequeueReusableCellWithIdentifier("NESeasonEpisodeCell")
+            self.configureCell(cell!, atIndexPath: indexPath)
+            return cell!
+        }else {
+            var cell:NEShowTableViewCell?
+            cell = (tableView.dequeueReusableCellWithIdentifier(self.showCellIdentifier) as? NEShowTableViewCell)!
+            if cell == nil {
+                tableView.registerNib(UINib(nibName: "NEEpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: self.showCellIdentifier)
+                cell = tableView.dequeueReusableCellWithIdentifier(self.showCellIdentifier) as? NEShowTableViewCell
+            }
+            self.configureCell(cell!, atIndexPath: indexPath)
+            return cell!
+        }
     }
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return self.frc.sectionForSectionIndexTitle(title, atIndex: index)
     }
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isEpisode {
+            return "Season \(self.frc.sections![section].name) "
+        }
         return self.frc.sections![section].name ?? ""
     }
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return self.frc.sectionIndexTitles
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if isEpisode {
+            return 44
+        }
         return 510
     }
     
@@ -146,15 +157,20 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
         if let searchBarText = searchController.searchBar.text {
             var predicate:NSPredicate?
             if searchBarText != "" {
-                predicate = NSPredicate(format: "show.name contains[cd] %@",searchBarText)
+                if self.isEpisode {
+                    predicate = NSPredicate(format: "show.name contains[cd] %@",searchBarText)
+
+                }else {
+                    predicate = NSPredicate(format: "name contains[cd] %@",searchBarText)
+                }
                 self.reloadFRC(predicate)
             }
         }
     }
     // MARK: -  DELEGATE: UISearchBar
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        self.reloadFRC(nil)
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+       self.reloadFRC(nil)
     }
     
     // MARK: - DELEGATE: NSFetchedResultsController

@@ -11,7 +11,7 @@ import Kingfisher
 
 
 class NEEpisodeDetailVC: UIViewController {
-
+    
     @IBOutlet weak var aboutShowButton: UIButton!
     @IBOutlet weak var watchButton: UIButton!
     @IBOutlet weak var airDateLabel: UILabel!
@@ -24,27 +24,36 @@ class NEEpisodeDetailVC: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     var episode: Episode!
-    
+    var show: Show!
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = (episode.show?.name)! + " S\(episode.season!)" + " E\(episode.episode!)"
-        if let path = episode.show?.image {
+        titleLabel.text = (show?.name)! + " S\(episode.season!)" + " E\(episode.episode!)"
+        if let path = show?.image {
             imageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         }
         smmaryLabel.text = episode.summary?.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "")
         durationLabel.text = "Duration: \(episode.runtime!)mins"
-        genreLabel.text = "Genres: \(episode.show!.genres!)"
-        ratingLabel.text = "Rating: \(episode.show!.rating!.average!)/10"
+        genreLabel.text = "Genres: \(show!.genres!)"
+        ratingLabel.text = "Rating: \(show!.rating!.average!)/10"
         airtimeLabel.text = "Airtime: \(episode.airtime!)"
         airDateLabel.text = "Airdate: \(CDHelper.dateToString(episode.airdate!))"
-
-        // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func onWatchNowButtonTapped(sender: UIButton) {
+        var url = Constants.putlockerURL
+        let showName = CDHelper.shared.selectedShow.name!.stringByReplacingOccurrencesOfString(" ", withString: "-")
+        url = url.stringByReplacingOccurrencesOfString("{showName}", withString: showName).stringByReplacingOccurrencesOfString("{season}", withString: String(episode!.season!)).stringByReplacingOccurrencesOfString("{episode}", withString: String(episode!.episode!))
+        print(url)
+        let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
+        let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
+        targetVC?.urlString = url
+        self.navigationController?.pushViewController(targetVC!, animated: true)
+        
+    }
     @IBAction func onABoutShowTapped(sender: UIButton) {
         let showStoryboard = UIStoryboard(name: "Show", bundle:nil)
-        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEEpisodeDetailVC") as? NEShowDetailsVC
-        targetVC?.show = episode.show
+        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
+        //        targetVC?.show = episode.show
         self.navigationController?.pushViewController(targetVC!, animated: true)
     }
 }

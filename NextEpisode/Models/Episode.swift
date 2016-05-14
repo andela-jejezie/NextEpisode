@@ -14,7 +14,7 @@ class Episode: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-                           context: NSManagedObjectContext) -> Episode {
+                           context: NSManagedObjectContext, showID:String) -> Episode {
         let episode = NSEntityDescription.insertNewObjectForEntityForName("Episode",
                                                                           inManagedObjectContext: context) as! Episode
         if let episdeNumber = dictionary["number"] as? NSNumber {
@@ -49,7 +49,7 @@ class Episode: NSManagedObject {
         if let summary = dictionary["summary"] as? String {
             episode.summary = CDHelper.formatString(summary)
         }
-        episode.show = Show.newInstance((dictionary["show"] as? [String:AnyObject])!, context: context)
+        episode.showID = NSNumber(long: Int(showID)!)
         return episode
     }
     

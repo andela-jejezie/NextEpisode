@@ -23,8 +23,6 @@ class Cast: NSManagedObject {
         if let character = dictionary["character"] as? [String:AnyObject] {
             cast.character = Character.newInstance(character, context: context)
         }
-        
-        
         return cast
     }
 }

@@ -32,9 +32,9 @@ class NEEpisodeTableViewCell: UITableViewCell {
        
         self.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         coverImageView.image = UIImage(named: "images")
-        if let name = episode.show?.name {
-            showTitleLabel.text = name
-        }
+//        if let name = episode.show?.name {
+//            showTitleLabel.text = name
+//        }
         guard let episodeNumber = episode.episode where episode.episode != nil else {
            episodeNumberLabel.text = "Episode: not available"
             return
@@ -50,9 +50,9 @@ class NEEpisodeTableViewCell: UITableViewCell {
 //
         summaryLabel.text = episode.summary!.isEmpty ? "No summary": episode.summary
         seasonLabel.text = "Season: \(episode.season!)"
-        if let path = episode.show?.image {
-            coverImageView.kf_setImageWithURL(NSURL(string: path)!)
-        }
+//        if let path = episode.show?.image {
+//            coverImageView.kf_setImageWithURL(NSURL(string: path)!)
+//        }
         
     }
     

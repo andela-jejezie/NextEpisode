@@ -103,6 +103,9 @@
                                                         <state key="normal" title="Watch Now">
                                                             <color key="titleColor" red="0.98431372549999996" green="0.98039215690000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="onWatchNowButtonTapped:" destination="I3A-Dl-S3U" eventType="touchUpInside" id="jxw-vc-w5Y"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.98431372549999996" green="0.98039215690000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
