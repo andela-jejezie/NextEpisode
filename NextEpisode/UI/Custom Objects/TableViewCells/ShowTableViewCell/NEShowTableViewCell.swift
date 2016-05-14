@@ -19,14 +19,13 @@ class NEShowTableViewCell: UITableViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
-    var isFavorite = false
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.selectionStyle = .None
     }
     
-    internal func configureCellForEpisode(show:Show) {
+    internal func configureCellForShow(show:Show) {
         
         self.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         coverImageView.image = UIImage(named: "images")
@@ -43,9 +42,6 @@ class NEShowTableViewCell: UITableViewCell {
         if let path = show.image {
             coverImageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         }
-        
-        print(CDHelper.shared.arrayOfFavoriteID)
-        print(show.showID!)
         
         let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show.showID!)
         if (item != nil) {

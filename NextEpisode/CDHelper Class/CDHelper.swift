@@ -27,6 +27,7 @@ class CDHelper : NSObject  {
     }
     
     var arrayOfFavoriteID = [NSNumber]()
+    var favoriteShows = [Show]()
     
     // MARK: - PATHS
     lazy var storesDirectory: NSURL? = {

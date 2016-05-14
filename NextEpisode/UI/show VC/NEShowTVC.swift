@@ -30,7 +30,7 @@ class NEShowTVC: CDTableViewController {
         
         self.configureSearch()
         self.definesPresentationContext = true
-//        NETodayEpisodesAPI.getAllShow(context)
+//        NETodayEpisodesAPI.getAllShow(context) 
 
     }
     
@@ -49,20 +49,21 @@ class NEShowTVC: CDTableViewController {
             (cell as! NEShowTableViewCell).readMoreButton.addTarget(self, action: #selector(NEShowTVC.readMoreButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             (cell as! NEShowTableViewCell).favoriteButton.addTarget(self, action: #selector(NEShowTVC.addFavorite(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
-            (cell as! NEShowTableViewCell).configureCellForEpisode(show)
+            (cell as! NEShowTableViewCell).configureCellForShow(show)
         }else {print("ERROR getting item in \(#function)")}
     }
     
     func addFavorite(sender:UIButton) {
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! NEShowTableViewCell
         let show = frc.objectAtIndexPath(indexPath) as? Show
-        if cell.isFavorite {
-        CDHelper.shared.arrayOfFavoriteID.removeAtIndex(CDHelper.shared.arrayOfFavoriteID.indexOf((show?.showID!)!)!)
-            cell.isFavorite = false
+        
+        let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show!.showID!)
+        if (item != nil) {
+            CDHelper.shared.arrayOfFavoriteID.removeAtIndex(CDHelper.shared.arrayOfFavoriteID.indexOf((show?.showID!)!)!)
+            CDHelper.shared.favoriteShows.removeAtIndex(CDHelper.shared.favoriteShows.indexOf(show!)!)
         }else {
             CDHelper.shared.arrayOfFavoriteID.append((show?.showID!)!)
-          cell.isFavorite = true
+            CDHelper.shared.favoriteShows.append(show!)
         }
         NSUserDefaults.standardUserDefaults().setObject(CDHelper.shared.arrayOfFavoriteID, forKey: "NEFavoriteShows")
         NSUserDefaults.standardUserDefaults().synchronize()

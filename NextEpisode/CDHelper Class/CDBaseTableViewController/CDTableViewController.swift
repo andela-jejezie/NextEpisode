@@ -170,7 +170,11 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: -  DELEGATE: UISearchBar
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-       self.reloadFRC(nil)
+//       self.reloadFRC(nil)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.reloadFRC(nil)
     }
     
     // MARK: - DELEGATE: NSFetchedResultsController

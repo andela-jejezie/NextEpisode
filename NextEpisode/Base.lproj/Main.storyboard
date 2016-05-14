@@ -69,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSm-qY-qaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="530" y="234"/>
+            <point key="canvasLocation" x="2154" y="234"/>
         </scene>
         <!--Storyboard Reference-->
         <scene sceneID="lvJ-Q4-nTx">
@@ -91,7 +91,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="JlM-gd-HZV" kind="relationship" relationship="viewControllers" id="GCn-tG-ucR"/>
-                        <segue destination="DnX-th-5un" kind="relationship" relationship="viewControllers" id="cEI-I0-p9V"/>
+                        <segue destination="Kqt-wN-i6m" kind="relationship" relationship="viewControllers" id="iJm-Wx-HiH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1x-5f-QAW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -134,7 +134,63 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdA-fe-kgK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-282" y="234"/>
+            <point key="canvasLocation" x="1342" y="234"/>
+        </scene>
+        <!--Favorite-->
+        <scene sceneID="eCL-ig-SoP">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8zv-gQ-u4c" customClass="NEFavoriteShowVC" customModule="NextEpisode" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wHo-DA-KzO"/>
+                        <viewControllerLayoutGuide type="bottom" id="g9f-ke-HV8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mgb-4w-BfU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FUk-8I-O0b">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8zv-gQ-u4c" id="25T-HX-IWL"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FUk-8I-O0b" firstAttribute="top" secondItem="wHo-DA-KzO" secondAttribute="bottom" id="jaI-Tl-vuG"/>
+                            <constraint firstAttribute="trailing" secondItem="FUk-8I-O0b" secondAttribute="trailing" id="nEf-JP-5Ai"/>
+                            <constraint firstItem="FUk-8I-O0b" firstAttribute="leading" secondItem="Mgb-4w-BfU" secondAttribute="leading" id="nkM-mK-ATl"/>
+                            <constraint firstItem="g9f-ke-HV8" firstAttribute="top" secondItem="FUk-8I-O0b" secondAttribute="bottom" id="yQ7-JG-Z5Q"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Favorite" id="BCb-DN-8wJ"/>
+                    <connections>
+                        <outlet property="tableView" destination="FUk-8I-O0b" id="XIB-yp-ZQw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WiD-bN-gDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-290" y="664"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="P03-GS-iFd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kqt-wN-i6m" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Z78-WL-Is7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UGF-MP-k8v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8zv-gQ-u4c" kind="relationship" relationship="rootViewController" id="X0A-X9-sqR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SdQ-1A-g8V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1102" y="664"/>
         </scene>
     </scenes>
 </document>
