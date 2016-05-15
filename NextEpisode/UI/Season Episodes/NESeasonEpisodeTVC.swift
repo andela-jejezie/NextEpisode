@@ -56,6 +56,22 @@ class NESeasonEpisodeTVC: CDTableViewController {
     // MARK: - CELL CONFIGURATION
     override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         if let episode = frc.objectAtIndexPath(indexPath) as? Episode {
+            let accessoryImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            if let airtime = episode.airtime {
+                let components = airtime.componentsSeparatedByString(":")
+                let hour = Int(components[0])
+                if let airdate = episode.airdate {
+                    let calendar = NSCalendar.currentCalendar()
+                  let date = calendar.dateByAddingUnit(.Hour, value: hour!, toDate: airdate, options: [])
+                    if date!.timeIntervalSince1970 >= NSDate().timeIntervalSince1970{
+                        accessoryImageView.image = UIImage(named: "offline")
+                    }else {
+                        accessoryImageView.image = UIImage(named: "online")
+                    }
+                }
+            }
+
+            cell.accessoryView = accessoryImageView
           cell.textLabel?.text = "Episode \(episode.episode!)"
             cell.detailTextLabel?.text = episode.name
         }else {print("ERROR getting item in \(#function)")}

@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import EventKit
 
 
 class NEEpisodeDetailVC: UIViewController {
@@ -37,17 +38,61 @@ class NEEpisodeDetailVC: UIViewController {
         ratingLabel.text = "Rating: \(show!.rating!.average!)/10"
         airtimeLabel.text = "Airtime: \(episode.airtime!)"
         airDateLabel.text = "Airdate: \(CDHelper.dateToString(episode.airdate!))"
+        if let airtime = episode.airtime {
+            let components = airtime.componentsSeparatedByString(":")
+            let hour = Int(components[0])
+            if let airdate = episode.airdate {
+                let calendar = NSCalendar.currentCalendar()
+                let date = calendar.dateByAddingUnit(.Hour, value: hour!, toDate: airdate, options: [])
+                if date!.timeIntervalSince1970 >= NSDate().timeIntervalSince1970{
+                     watchButton.setTitle("Add To Calendar", forState: .Normal)
+                }
+            }
+        }
     }
     
     @IBAction func onWatchNowButtonTapped(sender: UIButton) {
-        var url = Constants.putlockerURL
-        let showName = CDHelper.shared.selectedShow.name!.stringByReplacingOccurrencesOfString(" ", withString: "-")
-        url = url.stringByReplacingOccurrencesOfString("{showName}", withString: showName).stringByReplacingOccurrencesOfString("{season}", withString: String(episode!.season!)).stringByReplacingOccurrencesOfString("{episode}", withString: String(episode!.episode!))
-        print(url)
-        let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
-        let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
-        targetVC?.urlString = url
-        self.navigationController?.pushViewController(targetVC!, animated: true)
+        if let airtime = episode.airtime {
+            let components = airtime.componentsSeparatedByString(":")
+            let hour = Int(components[0])
+            if let airdate = episode.airdate {
+                let calendar = NSCalendar.currentCalendar()
+                let date = calendar.dateByAddingUnit(.Hour, value: hour!, toDate: airdate, options: [])
+                if date!.timeIntervalSince1970 >= NSDate().timeIntervalSince1970{
+                    let eventStore = EKEventStore()
+                    eventStore.requestAccessToEntityType(.Event, completion: { (granted, error) in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if (error != nil) {
+                                
+                            }else if !granted {
+                                
+                            }else {
+                                let event = EKEvent(eventStore: eventStore)
+                                event.title = "TV Series Reminder"
+                                event.startDate = self.episode.airdate!
+                                event.calendar = eventStore.defaultCalendarForNewEvents
+                                do {
+                                    try eventStore.saveEvent(event, span: .ThisEvent)
+                                }catch {
+                                    print("error saving to calendar",#function)
+                                }
+                                
+                            }
+                        })
+                    })
+                }else {
+                    var url = Constants.putlockerURL
+                    let showName = CDHelper.shared.selectedShow.name!.stringByReplacingOccurrencesOfString(" ", withString: "-")
+                    url = url.stringByReplacingOccurrencesOfString("{showName}", withString: showName).stringByReplacingOccurrencesOfString("{season}", withString: String(episode!.season!)).stringByReplacingOccurrencesOfString("{episode}", withString: String(episode!.episode!))
+                    let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
+                    let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
+                    targetVC?.urlString = url
+                    self.navigationController?.pushViewController(targetVC!, animated: true)
+
+                }
+            }
+        }
+
         
     }
 //    @IBAction func onABoutShowTapped(sender: UIButton) {
