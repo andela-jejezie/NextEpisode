@@ -24,14 +24,25 @@ class NEShowTVC: CDTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let appDomain = NSBundle.mainBundle().bundleIdentifier!
-//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         self.searchController = UISearchController(searchResultsController:  nil)
         
         self.configureSearch()
         self.definesPresentationContext = true
+        hideKeyboardWhenBackgroundIsTapped()
 //        NETodayEpisodesAPI.getAllShow(context) 
 
+    }
+    
+    func hideKeyboard () {
+        self.searchController?.searchBar.endEditing(true)
+    }
+    
+    func hideKeyboardWhenBackgroundIsTapped () {
+        let tgr = UITapGestureRecognizer(target: self, action:#selector(NEShowTVC.hideKeyboard))
+        tgr.cancelsTouchesInView = true
+        tableView.addGestureRecognizer(tgr)
     }
     
     // MARK: - VIEW

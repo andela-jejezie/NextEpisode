@@ -12,7 +12,7 @@ import Kingfisher
 
 class NEEpisodeDetailVC: UIViewController {
     
-    @IBOutlet weak var aboutShowButton: UIButton!
+//    @IBOutlet weak var aboutShowButton: UIButton!
     @IBOutlet weak var watchButton: UIButton!
     @IBOutlet weak var airDateLabel: UILabel!
     @IBOutlet weak var airtimeLabel: UILabel!
@@ -50,10 +50,10 @@ class NEEpisodeDetailVC: UIViewController {
         self.navigationController?.pushViewController(targetVC!, animated: true)
         
     }
-    @IBAction func onABoutShowTapped(sender: UIButton) {
-        let showStoryboard = UIStoryboard(name: "Show", bundle:nil)
-        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
-        //        targetVC?.show = episode.show
-        self.navigationController?.pushViewController(targetVC!, animated: true)
-    }
+//    @IBAction func onABoutShowTapped(sender: UIButton) {
+//        let showStoryboard = UIStoryboard(name: "Show", bundle:nil)
+//        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
+//        //        targetVC?.show = episode.show
+//        self.navigationController?.pushViewController(targetVC!, animated: true)
+//    }
 }

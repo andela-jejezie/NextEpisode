@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="586"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-zh-SKv">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="571"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="523"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2w-zO-bDE">
                                                 <rect key="frame" x="8" y="12" width="584" height="24"/>
@@ -79,21 +79,8 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFb-QQ-6GU">
-                                                <rect key="frame" x="0.0" y="463" width="600" height="108"/>
+                                                <rect key="frame" x="0.0" y="463" width="600" height="60"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9O-EB-dmm">
-                                                        <rect key="frame" x="20" y="60" width="560" height="40"/>
-                                                        <color key="backgroundColor" red="1" green="0.027450980390000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="r2y-Vb-TOr"/>
-                                                        </constraints>
-                                                        <state key="normal" title="About This Show">
-                                                            <color key="titleColor" red="0.98431372549999996" green="0.98039215690000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="onABoutShowTapped:" destination="I3A-Dl-S3U" eventType="touchUpInside" id="KQw-8x-Sys"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dZ-a4-EeX">
                                                         <rect key="frame" x="20" y="12" width="560" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.027450980390000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -110,12 +97,9 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.98431372549999996" green="0.98039215690000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="o9O-EB-dmm" secondAttribute="bottom" constant="8" id="4oH-Zh-rYr"/>
                                                     <constraint firstItem="3dZ-a4-EeX" firstAttribute="top" secondItem="oFb-QQ-6GU" secondAttribute="top" constant="12" id="7Bx-iV-nmG"/>
                                                     <constraint firstItem="3dZ-a4-EeX" firstAttribute="leading" secondItem="oFb-QQ-6GU" secondAttribute="leading" constant="20" id="Vcb-BT-Bq9"/>
-                                                    <constraint firstItem="o9O-EB-dmm" firstAttribute="top" secondItem="3dZ-a4-EeX" secondAttribute="bottom" constant="8" id="Xch-Bc-obq"/>
-                                                    <constraint firstItem="o9O-EB-dmm" firstAttribute="leading" secondItem="oFb-QQ-6GU" secondAttribute="leading" constant="20" id="bks-G6-Jh6"/>
-                                                    <constraint firstAttribute="trailing" secondItem="o9O-EB-dmm" secondAttribute="trailing" constant="20" id="dea-ia-056"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3dZ-a4-EeX" secondAttribute="bottom" constant="8" id="jYO-z9-mpc"/>
                                                     <constraint firstAttribute="trailing" secondItem="3dZ-a4-EeX" secondAttribute="trailing" constant="20" id="xpp-Vt-iUD"/>
                                                 </constraints>
                                             </view>
@@ -177,7 +161,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="650"/>
                     <connections>
-                        <outlet property="aboutShowButton" destination="o9O-EB-dmm" id="OXP-7P-Oev"/>
                         <outlet property="airDateLabel" destination="Wpo-eA-HEu" id="3mg-iO-8kM"/>
                         <outlet property="airtimeLabel" destination="G3R-W3-Ib6" id="VVc-Mj-Qsu"/>
                         <outlet property="durationLabel" destination="aZx-rZ-pFv" id="uN8-Eh-xxG"/>

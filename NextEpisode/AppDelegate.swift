@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let items = savedArray {
             CDHelper.shared.arrayOfFavoriteID = items
         }
-        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         return true
     }
 
