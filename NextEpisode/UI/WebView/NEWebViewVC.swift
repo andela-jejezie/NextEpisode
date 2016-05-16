@@ -15,10 +15,12 @@ class NEWebViewVC: NEGenericVC, UIWebViewDelegate {
     var urlString:String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         self.webView.delegate = self
         let url:NSURL = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         webView.loadRequest(request)
+        SwiftSpinner.show("Loading...")
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -27,6 +29,7 @@ class NEWebViewVC: NEGenericVC, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         allowLoading = false
+        SwiftSpinner.hide()
     }
 
 }

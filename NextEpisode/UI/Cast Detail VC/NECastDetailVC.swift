@@ -22,17 +22,47 @@ class NECastDetailVC: NEGenericVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         if let imageString = cast.person?.image {
-            personImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+            personImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         }
-        personNameLabel.text = cast.person?.name
-        personURLButton.setTitle("More about \(cast.person?.name!)", forState: .Normal)
+        if let PersonName = cast.person?.name {
+            title = "\(PersonName) "
+            personNameLabel.text = PersonName
+            personURLButton.setTitle("More about \(PersonName)", forState: .Normal)
+        }else {
+           personImageView.image = UIImage(named: "user")
+        }
         if let imageString = cast.character?.image {
-          characterImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+          characterImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+        }else {
+            characterImageView.image = UIImage(named: "user")
         }
-        characterNameLabel.text = cast.character?.name!
-        characterURLButton.setTitle("More about \(cast.character?.name!) ", forState: .Normal)
+        if let castName = cast.character?.name {
+            characterNameLabel.text = castName
+            characterURLButton.setTitle("More about \(castName) ", forState: .Normal)
+  
+        }
 
     }
+    
+    override func viewDidLayoutSubviews() {
+        personImageView.layer.cornerRadius = personImageView.frame.size.height/2
+        personImageView.clipsToBounds = true
+        characterImageView.layer.cornerRadius = personImageView.frame.size.height/2
+        characterImageView.clipsToBounds = true
+    }
 
+    @IBAction func onAboutCharacterTapped(sender: AnyObject) {
+        let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
+        let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
+        targetVC?.urlString = cast.character?.url!
+        self.navigationController?.pushViewController(targetVC!, animated: true)
+    }
+    @IBAction func onMoreAboutPersonTapped(sender: AnyObject) {
+        let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
+        let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
+        targetVC?.urlString = cast.person?.url!
+        self.navigationController?.pushViewController(targetVC!, animated: true)
+    }
 }

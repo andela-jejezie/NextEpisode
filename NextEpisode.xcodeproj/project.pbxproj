@@ -76,6 +76,10 @@
 		1FC37ECE1CE76AA100EFF605 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37EBC1CE76AA100EFF605 /* IQToolbar.swift */; };
 		1FC37ECF1CE76AA100EFF605 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37EBD1CE76AA100EFF605 /* IQUIView+IQKeyboardToolbar.swift */; };
 		1FC37ED01CE76AA100EFF605 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37EBF1CE76AA100EFF605 /* IQKeyboardManager.bundle */; };
+		1FC37ED91CE8DD6000EFF605 /* Info-tvOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37ED51CE8DD6000EFF605 /* Info-tvOS.plist */; };
+		1FC37EDA1CE8DD6000EFF605 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FC37ED61CE8DD6000EFF605 /* Info.plist */; };
+		1FC37EDB1CE8DD6000EFF605 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37ED81CE8DD6000EFF605 /* SwiftSpinner.swift */; };
+		1FC37EDE1CE9E56100EFF605 /* NERequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC37EDD1CE9E56100EFF605 /* NERequest.swift */; };
 		45FDD2BE372F0FA719F81C76 /* Pods_NextEpisode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +181,11 @@
 		1FC37EBC1CE76AA100EFF605 /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		1FC37EBD1CE76AA100EFF605 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		1FC37EBF1CE76AA100EFF605 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		1FC37ED51CE8DD6000EFF605 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
+		1FC37ED61CE8DD6000EFF605 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FC37ED71CE8DD6000EFF605 /* SwiftSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftSpinner.h; sourceTree = "<group>"; };
+		1FC37ED81CE8DD6000EFF605 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
+		1FC37EDD1CE9E56100EFF605 /* NERequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NERequest.swift; sourceTree = "<group>"; };
 		7EC6E5D4E928FD9F4283D21A /* Pods_NextEpisode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextEpisode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		878E8CC1134327478F5AF23D /* Pods-NextEpisode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.release.xcconfig"; sourceTree = "<group>"; };
 		9107E4B632611275E3541146 /* Pods-NextEpisode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextEpisode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextEpisode/Pods-NextEpisode.debug.xcconfig"; sourceTree = "<group>"; };
@@ -328,6 +337,7 @@
 		1FBBFE6B1CDA347300199AFE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37EDC1CE9E52900EFF605 /* Request */,
 				1FBBFE951CDA459B00199AFE /* Today's Episode API */,
 			);
 			path = API;
@@ -385,6 +395,7 @@
 		1FBBFF4F1CDC69FD00199AFE /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				1FC37ED41CE8DD6000EFF605 /* SwiftSpinner */,
 				1FC37EA91CE76AA100EFF605 /* IQKeyboardManagerSwift */,
 			);
 			path = Lib;
@@ -564,6 +575,25 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		1FC37ED41CE8DD6000EFF605 /* SwiftSpinner */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37ED51CE8DD6000EFF605 /* Info-tvOS.plist */,
+				1FC37ED61CE8DD6000EFF605 /* Info.plist */,
+				1FC37ED71CE8DD6000EFF605 /* SwiftSpinner.h */,
+				1FC37ED81CE8DD6000EFF605 /* SwiftSpinner.swift */,
+			);
+			path = SwiftSpinner;
+			sourceTree = "<group>";
+		};
+		1FC37EDC1CE9E52900EFF605 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				1FC37EDD1CE9E56100EFF605 /* NERequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		7ECA29DA01E385CF21860E84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +718,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FC37ED91CE8DD6000EFF605 /* Info-tvOS.plist in Resources */,
 				1FBBFE451CDA338900199AFE /* LaunchScreen.storyboard in Resources */,
 				1FC37E9C1CE454C900EFF605 /* NEShowTableViewCell.xib in Resources */,
 				1FC37E821CDE0C8F00EFF605 /* Show.storyboard in Resources */,
@@ -695,6 +726,7 @@
 				1FBBFE421CDA338900199AFE /* Assets.xcassets in Resources */,
 				1FC37EA51CE5C8AB00EFF605 /* WebViewStoryboard.storyboard in Resources */,
 				1FBBFF661CDC720800199AFE /* NEEpisodeTableViewCell.xib in Resources */,
+				1FC37EDA1CE8DD6000EFF605 /* Info.plist in Resources */,
 				1FBBFE401CDA338900199AFE /* Main.storyboard in Resources */,
 				1FC37ED01CE76AA100EFF605 /* IQKeyboardManager.bundle in Resources */,
 			);
@@ -770,6 +802,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FBBFE9B1CDA463900199AFE /* Constants.swift in Sources */,
+				1FC37EDB1CE8DD6000EFF605 /* SwiftSpinner.swift in Sources */,
 				1FC37E871CDE12A400EFF605 /* NECastCollectionViewCell.swift in Sources */,
 				1FC37E841CDE0CC800EFF605 /* NEShowDetailsVC.swift in Sources */,
 				1FBBFF411CDB184900199AFE /* Cast+CoreDataProperties.swift in Sources */,
@@ -804,6 +837,7 @@
 				1FC37EC51CE76AA100EFF605 /* IQUIWindow+Hierarchy.swift in Sources */,
 				1FBBFF3C1CDB184900199AFE /* Show.swift in Sources */,
 				1FBBFF4A1CDB184900199AFE /* Rating.swift in Sources */,
+				1FC37EDE1CE9E56100EFF605 /* NERequest.swift in Sources */,
 				1FC37ECC1CE76AA100EFF605 /* IQPreviousNextView.swift in Sources */,
 				1FC37EC61CE76AA100EFF605 /* IQKeyboardManagerConstants.swift in Sources */,
 				1FBBFF441CDB184900199AFE /* Person.swift in Sources */,

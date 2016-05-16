@@ -130,4 +130,26 @@ class CDHelper : NSObject  {
     class func formatString(text:String)->String {
        return text.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "").stringByReplacingOccurrencesOfString("<em>", withString: "").stringByReplacingOccurrencesOfString("</em>", withString: "").stringByReplacingOccurrencesOfString("<i>", withString: "").stringByReplacingOccurrencesOfString("</strong>", withString: "").stringByReplacingOccurrencesOfString("<strong>", withString: "").stringByReplacingOccurrencesOfString("<br>", withString: "").stringByReplacingOccurrencesOfString("</br>", withString: "")
     }
+    
+    class func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+//        float oldWidth = sourceImage.size.width;
+//        float scaleFactor = i_width / oldWidth;
+//        
+//        float newHeight = sourceImage.size.height * scaleFactor;
+//        float newWidth = oldWidth * scaleFactor;
+//        
+//        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
+//        [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
+//        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+        let oldWidth = image.size.width
+        let scaleFactor = newWidth/oldWidth
+        let newHeight = image.size.height * scaleFactor
+        let newWidth = oldWidth * scaleFactor
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }

@@ -11,6 +11,8 @@ import CoreData
 
 class CDTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
+    var searchButtton: UIBarButtonItem!
+    var isSearching:Bool?
     // MARK: - INITIALIZATION
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,10 +31,12 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
         if let _searchController = self.searchController {
             _searchController.delegate = self
             _searchController.searchResultsUpdater = self
+            _searchController.hidesNavigationBarDuringPresentation = false
             _searchController.dimsBackgroundDuringPresentation = false
             _searchController.searchBar.delegate = self
             _searchController.searchBar.sizeToFit()
-            self.tableView.tableHeaderView = _searchController.searchBar
+            _searchController.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+            searchBarButtonItem = navigationItem.rightBarButtonItem
         }else {
             print("error configuring _searchcontroller in %@", #function)
         }
@@ -80,12 +84,12 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: - FETCHING
     func performFetch () {
         self.frc.managedObjectContext.performBlock ({
-
             do {
                 try self.frc.performFetch()
             } catch {
                 print("\(#function) FAILED : \(error)")
             }
+            SwiftSpinner.hide()
             self.tableView.reloadData()
         })
     }
@@ -93,6 +97,8 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: - VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
+        SwiftSpinner.show("Loading...")
+        self.isSearching = false
         // Force fetch when notified of significant data changes
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CDTableViewController.performFetch), name: "SomethingChanged", object: nil)
         self.tableView.registerNib(UINib(nibName: "NEEpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: self.episcodeCellIdentifier)
@@ -100,6 +106,7 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
 
     
@@ -126,7 +133,7 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
             var cell:NEShowTableViewCell?
             cell = (tableView.dequeueReusableCellWithIdentifier(self.showCellIdentifier) as? NEShowTableViewCell)!
             if cell == nil {
-                tableView.registerNib(UINib(nibName: "NEEpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: self.showCellIdentifier)
+                tableView.registerNib(UINib(nibName: "NEShowTableViewCell", bundle: nil), forCellReuseIdentifier: self.showCellIdentifier)
                 cell = tableView.dequeueReusableCellWithIdentifier(self.showCellIdentifier) as? NEShowTableViewCell
             }
             self.configureCell(cell!, atIndexPath: indexPath)
@@ -167,15 +174,6 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
             }
         }
     }
-    // MARK: -  DELEGATE: UISearchBar
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-//       self.reloadFRC(nil)
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        self.reloadFRC(nil)
-    }
     
     // MARK: - DELEGATE: NSFetchedResultsController
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -207,6 +205,68 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         }
-    }    
+    }
+    
+    @IBAction func searchButtonPressed(sender: AnyObject) {
+        isSearching = true
+        showSearchBar()
+
+    }
+    
+    
+    func showSearchBar() {
+        searchController?.searchBar.alpha = 0
+        navigationItem.titleView = searchController?.searchBar
+        navigationItem.setRightBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.searchController?.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchController?.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        isSearching = false
+        navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
+        UIView.animateWithDuration(0.3, animations: {
+            let navImageView = UIImageView(image: UIImage(named: "brand"))
+            self.navigationItem.titleView = navImageView
+            }, completion: { finished in
+                
+        })
+    }
+    
+    
+    //MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        isSearching = false
+        self.reloadFRC(nil)
+        hideSearchBar()
+        UIView.animateWithDuration(0.3) {
+        }
+    }
+    var searchBarButtonItem: UIBarButtonItem?
+    var logoImageView   : UIImageView!
+     
+}
+
+extension UIFont {
+    
+    func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
+        let descriptor = self.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
+        return UIFont(descriptor: descriptor, size: 0)
+    }
+    
+    func bold() -> UIFont {
+        return withTraits(.TraitBold)
+    }
+    
+    func italic() -> UIFont {
+        return withTraits(.TraitItalic)
+    }
+    
+    func boldItalic() -> UIFont {
+        return withTraits(.TraitBold, .TraitItalic)
+    }
     
 }

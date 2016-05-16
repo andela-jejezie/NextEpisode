@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 
 class NEShowTableViewCell: UITableViewCell {
@@ -29,9 +30,8 @@ class NEShowTableViewCell: UITableViewCell {
         
         self.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         coverImageView.image = UIImage(named: "images")
-        if let name = show.name {
-            nameLabel.text = name
-        }
+        
+            nameLabel.text = show.name
         guard let rating = show.rating?.average where show.rating?.average != nil else {
             ratingLabel.text = "Rating: not available"
             return
@@ -40,7 +40,10 @@ class NEShowTableViewCell: UITableViewCell {
         
         summaryLabel.text = show.summary!.isEmpty ? "No summary": show.summary
         if let path = show.image {
-            coverImageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+            let imageView = UIImageView()
+            imageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                self.coverImageView.image = CDHelper.resizeImage(image!, newWidth: self.coverImageView.frame.size.width)
+            })
         }
         
         let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show.showID!)

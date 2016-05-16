@@ -15,6 +15,8 @@ class NEFavoriteShowVC: NEGenericVC, UITableViewDelegate, UITableViewDataSource 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = 510
+        self.title = "Favorites"
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         self.tableView.registerNib(UINib(nibName: "NEShowTableViewCell", bundle: nil), forCellReuseIdentifier: "NEShowTableViewCell")
         for showID in CDHelper.shared.arrayOfFavoriteID {
             let context = CDHelper.shared.context
@@ -71,6 +73,7 @@ class NEFavoriteShowVC: NEGenericVC, UITableViewDelegate, UITableViewDataSource 
         let showStoryboard = UIStoryboard(name: "Show", bundle: nil)
         let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
         targetVC?.show = show
+        targetVC?.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(targetVC!, animated: true)
     }
     

@@ -26,8 +26,8 @@ class TodayEpisodesVC: CDTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchController = UISearchController(searchResultsController:  nil)
-        
-      self.configureSearch()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+//      self.configureSearch()
         self.definesPresentationContext = true
     }
     

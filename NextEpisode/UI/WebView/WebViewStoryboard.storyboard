@@ -8,7 +8,7 @@
         <!--Web ViewVC-->
         <scene sceneID="9tu-hp-Duf">
             <objects>
-                <viewController storyboardIdentifier="NEWebViewVC" id="bfv-Td-Zzv" customClass="NEWebViewVC" customModule="NextEpisode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NEWebViewVC" automaticallyAdjustsScrollViewInsets="NO" id="bfv-Td-Zzv" customClass="NEWebViewVC" customModule="NextEpisode" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KhJ-v5-hUs"/>
                         <viewControllerLayoutGuide type="bottom" id="9Pg-nH-feV"/>
@@ -33,6 +33,7 @@
                             <constraint firstItem="4F1-jI-E4Z" firstAttribute="leading" secondItem="Oza-NM-sxW" secondAttribute="leading" id="jvp-9R-1GD"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="webView" destination="4F1-jI-E4Z" id="I8e-jv-YRY"/>

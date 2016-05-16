@@ -13,20 +13,10 @@ class NEGenericVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func hideKeyboard () {
-        self.view.endEditing(true)
-    }
-    
-    func hideKeyboardWhenBackgroundIsTapped () {
-        let tgr = UITapGestureRecognizer(target: self, action:Selector("hideKeyboard"))
-        self.view.addGestureRecognizer(tgr)
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.titleTextAttributes =  [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "Savoye LET", size: 30)!]
     }
 
 }

@@ -71,14 +71,6 @@
             </objects>
             <point key="canvasLocation" x="2154" y="234"/>
         </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="lvJ-Q4-nTx">
-            <objects>
-                <viewControllerPlaceholder id="YsN-BF-mCA" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1VD-Ru-EKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1082.5" y="-571"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Igw-Fh-vXY">
             <objects>
@@ -117,11 +109,11 @@
             </objects>
             <point key="canvasLocation" x="-282" y="-446"/>
         </scene>
-        <!--Item-->
+        <!--All Shows-->
         <scene sceneID="jZV-YV-8G1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JlM-gd-HZV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Gyt-8K-sth"/>
+                    <tabBarItem key="tabBarItem" title="All Shows" image="tv30" id="Gyt-8K-sth"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P22-is-ixO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -193,4 +185,8 @@
             <point key="canvasLocation" x="-1102" y="664"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tv30" width="30" height="30"/>
+    </resources>
+    <color key="tintColor" red="1" green="0.027450980390000001" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
