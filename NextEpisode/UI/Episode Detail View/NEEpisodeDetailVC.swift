@@ -13,7 +13,7 @@ import EventKit
 
 class NEEpisodeDetailVC: NEGenericVC {
     
-//    @IBOutlet weak var aboutShowButton: UIButton!
+    //    @IBOutlet weak var aboutShowButton: UIButton!
     @IBOutlet weak var watchButton: UIButton!
     @IBOutlet weak var airDateLabel: UILabel!
     @IBOutlet weak var airtimeLabel: UILabel!
@@ -30,9 +30,18 @@ class NEEpisodeDetailVC: NEGenericVC {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         self.hidesBottomBarWhenPushed = true
         title = (show?.name)! + " S\(episode.season!)" + " E\(episode.episode!)"
-        if let path = show?.image {
-            imageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+        if let imageString = show?.image {
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                if let personImage = image {
+                    self.imageView.image = CDHelper.resizeImage(personImage, newWidth: self.imageView.frame.size.width)
+                }else {
+                    self.imageView.image = UIImage(named: "user")
+                }
+            })
+        }else {
+            imageView.image = UIImage(named: "user")
         }
+        
         smmaryLabel.text = episode.summary?.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "")
         durationLabel.text = "Duration: \(episode.runtime!)mins"
         if let genre = show.genres {
@@ -57,8 +66,8 @@ class NEEpisodeDetailVC: NEGenericVC {
         }
     }
     
-
-
+    
+    
     
     @IBAction func onWatchNowButtonTapped(sender: UIButton) {
         if let airtime = episode.airtime {
@@ -68,7 +77,7 @@ class NEEpisodeDetailVC: NEGenericVC {
                 let calendar = NSCalendar.currentCalendar()
                 if let _hour = hour {
                     airdate = calendar.dateByAddingUnit(.Hour, value: _hour, toDate: airdate, options: [])!
- 
+                    
                 }
                 if airdate.timeIntervalSince1970 >= NSDate().timeIntervalSince1970{
                     let eventStore = EKEventStore()
@@ -107,17 +116,9 @@ class NEEpisodeDetailVC: NEGenericVC {
                     let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
                     targetVC?.urlString = url
                     self.navigationController?.pushViewController(targetVC!, animated: true)
-
+                    
                 }
             }
         }
-
-        
     }
-//    @IBAction func onABoutShowTapped(sender: UIButton) {
-//        let showStoryboard = UIStoryboard(name: "Show", bundle:nil)
-//        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
-//        //        targetVC?.show = episode.show
-//        self.navigationController?.pushViewController(targetVC!, animated: true)
-//    }
 }

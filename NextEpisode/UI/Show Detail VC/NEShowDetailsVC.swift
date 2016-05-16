@@ -30,6 +30,17 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
         collectionView.dataSource = self
         collectionView.delegate = self
         title = show.name!
+        if let imageString = show.image {
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                if let personImage = image {
+                    self.showImageView.image = CDHelper.resizeImage(personImage, newWidth: self.showImageView.frame.size.width)
+                }else {
+                    self.showImageView.image = UIImage(named: "user")
+                }
+            })
+        }else {
+            showImageView.image = UIImage(named: "user")
+        }
         showImageView.kf_setImageWithURL(NSURL(string: show.image!)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         showSummaryLabel.text = show.summary!
         ratingLabel.text = "Rating \(show.rating!.average!)/10"

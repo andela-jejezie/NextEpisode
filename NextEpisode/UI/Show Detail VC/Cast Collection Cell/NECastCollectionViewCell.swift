@@ -13,13 +13,19 @@ class NECastCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     override func layoutSubviews() {
-         imageView.layer.cornerRadius = imageView.frame.size.height/2
+        imageView.layer.cornerRadius = imageView.frame.size.height/2
         imageView.clipsToBounds = true
     }
     internal func configureCellForData (cast:Cast) {
         // add check for empty image
-        if let image = cast.person?.image {
-            imageView.kf_setImageWithURL(NSURL(string: image)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+        if let imageString = cast.person?.image {
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                if let personImage = image {
+                    self.imageView.image = CDHelper.resizeImage(personImage, newWidth: self.imageView.frame.size.width)
+                }else {
+                    self.imageView.image = UIImage(named: "user")
+                }
+            })
             nameLabel.text = cast.person?.name!
         }else {
             imageView.image = UIImage(named: "user")

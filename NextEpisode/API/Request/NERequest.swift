@@ -16,6 +16,7 @@ class NERequest: NSObject {
         let endpoint = Constants.baseURL + "search/shows?q=\(name)"
         guard let url = NSURL(string: endpoint) else {
             print("failed to create url",#function)
+            onCompletion(false, nil)
             return
         }
         let request = NSURLRequest(URL: url)
@@ -23,10 +24,12 @@ class NERequest: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             guard let responseData = data else {
                 print("didn't get data", #function)
+                onCompletion(false, nil)
                 return
             }
             guard error == nil else {
                 print("an error occured \(error?.localizedDescription)")
+                onCompletion(false, nil)
                 return
             }
             let context = CDHelper.shared.context

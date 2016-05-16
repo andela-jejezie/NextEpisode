@@ -42,8 +42,15 @@ class NEShowTableViewCell: UITableViewCell {
         if let path = show.image {
             let imageView = UIImageView()
             imageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
-                self.coverImageView.image = CDHelper.resizeImage(image!, newWidth: self.coverImageView.frame.size.width)
+                if let showImage = image {
+                    self.coverImageView.image = CDHelper.resizeImage(showImage, newWidth: self.coverImageView.frame.size.width)
+                }else {
+                    self.coverImageView.image = UIImage(named: "user")
+                }
+                
             })
+        }else {
+            self.coverImageView.image = UIImage(named: "user")
         }
         
         let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show.showID!)

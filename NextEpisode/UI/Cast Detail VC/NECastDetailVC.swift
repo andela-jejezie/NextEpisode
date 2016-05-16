@@ -24,7 +24,15 @@ class NECastDetailVC: NEGenericVC {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         if let imageString = cast.person?.image {
-            personImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                if let personImage = image {
+                    self.personImageView.image = CDHelper.resizeImage(personImage, newWidth: self.personImageView.frame.size.width)
+                }else {
+                    self.personImageView.image = UIImage(named: "user")
+                }
+            })
+        }else {
+            personImageView.image = UIImage(named: "user")
         }
         if let PersonName = cast.person?.name {
             title = "\(PersonName) "
@@ -34,7 +42,13 @@ class NECastDetailVC: NEGenericVC {
            personImageView.image = UIImage(named: "user")
         }
         if let imageString = cast.character?.image {
-          characterImageView.kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                if let personImage = image {
+                    self.characterImageView.image = CDHelper.resizeImage(personImage, newWidth: self.characterImageView.frame.size.width)
+                }else {
+                    self.characterImageView.image = UIImage(named: "user")
+                }
+            })
         }else {
             characterImageView.image = UIImage(named: "user")
         }
