@@ -18,7 +18,7 @@ class NESeasonEpisodeTVC: CDTableViewController {
         self.sort = [NSSortDescriptor(key: "season", ascending: true),   NSSortDescriptor(key: "episode", ascending: true)]
         self.sectionNameKeyPath = "season"
         self.fetchBatchSize = 20
-        self.filter = NSPredicate(format: "showID == %@", CDHelper.shared.selectedShow.showID!)
+        self.filter = NSPredicate(format: "show == %@", CDHelper.shared.selectedShow)
         self.isEpisode = true
         
     }
@@ -28,11 +28,21 @@ class NESeasonEpisodeTVC: CDTableViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         self.definesPresentationContext = true
         self.tableView.rowHeight = 44;
-        if CDHelper.shared.selectedShow?.episodes?.count == 0 {
             let showString = String(CDHelper.shared.selectedShow.showID!)
-            NETodayEpisodesAPI.getEpisodesForShowWithID(showString, onCompletion: { (success) in
+            
+            NERequest.getEpisodes(showString, completionHandler: { (episodes, errorMessage) in
+                dispatch_async(dispatch_get_main_queue(), { 
+                    if let _ = episodes {
+                        for episodeDict in episodes! {
+                            if let dict = episodeDict as? [String:AnyObject] {
+                                Episode.newInstance(dict, context: CDHelper.shared.context, show: CDHelper.shared.selectedShow)
+                            }
+                        }
+                        CDHelper.saveSharedContext()
+                        self.performFetch()
+                    }
+                })
             })
-        }
         title = "\(CDHelper.shared.selectedShow.name!) Seasons"
     }
     

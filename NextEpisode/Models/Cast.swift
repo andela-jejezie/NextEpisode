@@ -2,7 +2,7 @@
 //  Cast.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/5/16.
+//  Created by Andela on 6/19/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 
@@ -11,10 +11,10 @@ import CoreData
 
 
 class Cast: NSManagedObject {
-    
-    // Insert code here to add functionality to your managed object subclass
+
+// Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-                           context: NSManagedObjectContext) -> Cast {
+                           context: NSManagedObjectContext, forShow show:Show) -> Cast {
         let cast = NSEntityDescription.insertNewObjectForEntityForName("Cast",
                                                                        inManagedObjectContext: context) as! Cast
         if let person = dictionary["person"] as? [String:AnyObject] {
@@ -23,6 +23,7 @@ class Cast: NSManagedObject {
         if let character = dictionary["character"] as? [String:AnyObject] {
             cast.character = Character.newInstance(character, context: context)
         }
+        cast.show = show
         return cast
     }
 }

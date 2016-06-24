@@ -20,37 +20,62 @@ class NEEpisodeDetailVC: NEGenericVC {
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var smmaryLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var seeMoreButton: UIButton!
+    @IBOutlet weak var seeMoreButtonHeight: NSLayoutConstraint!
+
+
     
     var episode: Episode!
     var show: Show!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.seeMoreButtonHeight.constant = 94
+        summaryLabel.numberOfLines = 0
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         self.hidesBottomBarWhenPushed = true
-        title = (show?.name)! + " S\(episode.season!)" + " E\(episode.episode!)"
+        if let showName = show.name, showSeason = episode.season, episodeNumber = episode.episode {
+            title = showName + " S\(showSeason)" + " E\(episodeNumber)"
+        }
         if let imageString = show?.image {
-            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "user"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+            UIImageView().kf_setImageWithURL(NSURL(string: imageString)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
                 if let personImage = image {
                     self.imageView.image = CDHelper.resizeImage(personImage, newWidth: self.imageView.frame.size.width)
                 }else {
-                    self.imageView.image = UIImage(named: "user")
+                    self.imageView.image = UIImage(named: "images")
                 }
             })
         }else {
-            imageView.image = UIImage(named: "user")
+            imageView.image = UIImage(named: "images")
+        }
+        if let summary = episode.summary {
+            summaryLabel.text = CDHelper.formatString(summary)
+        }else {
+            summaryLabel.text = "Synopsis not available"
+        }
+        if let runtime = episode.runtime {
+           durationLabel.text = "Duration: \(runtime)mins"
+        }else {
+            durationLabel.text = "Duration: not available"
         }
         
-        smmaryLabel.text = episode.summary?.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "")
-        durationLabel.text = "Duration: \(episode.runtime!)mins"
         if let genre = show.genres {
             let genreString = genre.stringByReplacingOccurrencesOfString(",", withString: ", ")
             genreLabel.text = "Genres: \(genreString)"
         }
-        ratingLabel.text = "Rating: \(show!.rating!.average!)/10"
-        airtimeLabel.text = episode.airtime == "" ?  "Airtime: Not available" : "Airtime: \(episode.airtime!)"
-        airDateLabel.text = "Airdate: \(CDHelper.dateToString(episode.airdate!))"
+        if let rating = show.averageRating {
+           ratingLabel.text = "Rating: \(rating)/10"
+        }
+        
+        if let airtime = episode.airtime {
+           airtimeLabel.text = airtime == "" ?  "Airtime: Not available" : "Airtime: \(airtime)" 
+        }
+        
+        
+        if let airdate = episode.airdate {
+            airDateLabel.text = "Airdate: \(CDHelper.dateToString(airdate))"
+        }
         if let airtime = episode.airtime {
             let components = airtime.componentsSeparatedByString(":")
             let hour = Int(components[0])
@@ -63,6 +88,24 @@ class NEEpisodeDetailVC: NEGenericVC {
                     watchButton.setTitle("Add To Calendar", forState: .Normal)
                 }
             }
+        }
+    }
+    
+    @IBAction func onSeeMoreTapped(sender: AnyObject) {
+        if seeMoreButtonHeight.constant == 54 {
+            self.seeMoreButton.setTitle("See less", forState: .Normal)
+            let maximumLabelSize = CGSizeMake(summaryLabel.frame.size.width, 800);
+            let expectedSize = summaryLabel.sizeThatFits(maximumLabelSize)
+            UIView.animateWithDuration(0.5, animations: {
+                self.seeMoreButtonHeight.constant = expectedSize.height
+                self.view.layoutIfNeeded()
+            })
+        }else {
+            self.seeMoreButton.setTitle("See more", forState: .Normal)
+            UIView.animateWithDuration(0.5, animations: {
+                self.seeMoreButtonHeight.constant = 94
+                self.view.layoutIfNeeded()
+            })
         }
     }
     
@@ -115,6 +158,7 @@ class NEEpisodeDetailVC: NEGenericVC {
                     let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
                     let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
                     targetVC?.urlString = url
+                    targetVC?.displayTitle = title
                     self.navigationController?.pushViewController(targetVC!, animated: true)
                     
                 }

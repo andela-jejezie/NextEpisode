@@ -2,7 +2,7 @@
 //  Episode+CoreDataProperties.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/13/16.
+//  Created by Andela on 6/19/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,8 +22,9 @@ extension Episode {
     @NSManaged var name: String?
     @NSManaged var runtime: NSNumber?
     @NSManaged var season: NSNumber?
+    @NSManaged var showID: NSNumber?
     @NSManaged var summary: String?
     @NSManaged var url: String?
-    @NSManaged var showID: NSNumber?
+    @NSManaged var show: Show?
 
 }

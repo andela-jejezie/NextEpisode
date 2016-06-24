@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
-
+    
     @IBOutlet weak var seeMoreButton: UIButton!
     @IBOutlet weak var showSummaryLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,7 +24,6 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
-        let showIDString = String(show.showID!)
         self.seeMoreButtonHeight.constant = 54
         showSummaryLabel.numberOfLines = 0
         collectionView.dataSource = self
@@ -42,25 +41,43 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
             showImageView.image = UIImage(named: "user")
         }
         showImageView.kf_setImageWithURL(NSURL(string: show.image!)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
-        showSummaryLabel.text = show.summary!
-        ratingLabel.text = "Rating \(show.rating!.average!)/10"
+        if let summary = show.summary {
+            showSummaryLabel.text = CDHelper.formatString(summary)
+        }else {
+            showSummaryLabel.text = "Synopsis not available"
+        }
+        
+        ratingLabel.text = "Rating \(show.averageRating!)/10"
         if show.casts?.count > 0 {
             casts = show.casts!.map({ ($0 as! Cast) })
         }
         if show.casts?.count == 0 {
-            NETodayEpisodesAPI.getCastForShow(showIDString, onCompletion: { (res, error) in
-                dispatch_async(dispatch_get_main_queue(), { 
-                    if self.show.casts?.count > 0 {
-                        self.casts = self.show.casts!.map({ ($0 as! Cast) })
+            let showIDString = String(show.showID!)
+            NERequest.getCastsForShow(showIDString, completionHandler: { (casts, errorMessage) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let _ = casts {
+                        print(casts)
+                        for object in casts! {
+                            if let dict = object as? [String:AnyObject] {
+                                Cast.newInstance(dict, context: CDHelper.shared.context, forShow: self.show)
+                            }
+                        }
+                        CDHelper.saveSharedContext()
+                        if self.show.casts?.count > 0 {
+                            self.casts = self.show.casts!.map({ ($0 as! Cast) })
+                        }
+                        self.collectionView.reloadData()
                     }
-                    self.collectionView.reloadData()
                 })
             })
+            
+            
+            
         }
         
-
-    }
         
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return casts.count
     }
@@ -76,13 +93,13 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
         self.performSegueWithIdentifier("ShowDetailsToCastDetailsSegue", sender: nil)
     }
     
-
+    
     @IBAction func onSeeMoreTapped(sender: AnyObject) {
         if seeMoreButtonHeight.constant == 54 {
             self.seeMoreButton.setTitle("See less", forState: .Normal)
             let maximumLabelSize = CGSizeMake(showSummaryLabel.frame.size.width, 800);
             let expectedSize = showSummaryLabel.sizeThatFits(maximumLabelSize)
-            UIView.animateWithDuration(0.5, animations: { 
+            UIView.animateWithDuration(0.5, animations: {
                 self.seeMoreButtonHeight.constant = expectedSize.height
                 self.view.layoutIfNeeded()
             })
@@ -97,9 +114,9 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
     
     @IBAction func onSeasonButtonTapped(sender: UIButton) {
         CDHelper.shared.selectedShow = self.show
-       let targetVC = self.storyboard?.instantiateViewControllerWithIdentifier("NESeasonEpisodeTVC") as? NESeasonEpisodeTVC
+        let targetVC = self.storyboard?.instantiateViewControllerWithIdentifier("NESeasonEpisodeTVC") as? NESeasonEpisodeTVC
         self.navigationController?.pushViewController(targetVC!, animated: true)
-
+        
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetailsToCastDetailsSegue" {
@@ -110,5 +127,5 @@ class NEShowDetailsVC: NEGenericVC, UICollectionViewDataSource, UICollectionView
             targetVC?.cast = cast
         }
     }
-
+    
 }

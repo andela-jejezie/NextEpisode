@@ -71,12 +71,22 @@ class NECastDetailVC: NEGenericVC {
         let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
         let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
         targetVC?.urlString = cast.character?.url!
+        if let name = cast.character?.name {
+            targetVC?.displayTitle = name
+        }else {
+            targetVC?.displayTitle = ""
+        }
         self.navigationController?.pushViewController(targetVC!, animated: true)
     }
     @IBAction func onMoreAboutPersonTapped(sender: AnyObject) {
         let webStoryboard = UIStoryboard(name: "WebViewStoryboard", bundle: nil)
         let targetVC = webStoryboard.instantiateViewControllerWithIdentifier("NEWebViewVC") as? NEWebViewVC
         targetVC?.urlString = cast.person?.url!
+        if let name = cast.person?.name {
+          targetVC?.displayTitle = name
+        }else {
+            targetVC?.displayTitle = ""
+        }
         self.navigationController?.pushViewController(targetVC!, animated: true)
     }
 }

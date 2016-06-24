@@ -1,92 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="Cast" representedClassName=".Cast" syncable="YES">
-        <relationship name="character" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" syncable="YES"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" syncable="YES"/>
+        <relationship name="character" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="cast" inverseEntity="Character" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="cast" inverseEntity="Person" syncable="YES"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="casts" inverseEntity="Show" syncable="YES"/>
     </entity>
     <entity name="Character" representedClassName=".Character" syncable="YES">
         <attribute name="characterID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Country" representedClassName=".Country" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="timezone" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cast" inverseName="character" inverseEntity="Cast" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="characterID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Episode" representedClassName=".Episode" syncable="YES">
         <attribute name="airdate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="airtime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="episode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="episodeID" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="episodeID" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" defaultValueString="New Episode" syncable="YES"/>
         <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="season" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="showID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="showID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Externals" representedClassName=".Externals" syncable="YES">
-        <attribute name="imdb" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="thetvdb" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="tvrage" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="episodeID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Network" representedClassName=".Network" syncable="YES">
+        <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="networkID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" syncable="YES"/>
+        <attribute name="timeZone" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="show" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="network" inverseEntity="Show" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="networkID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Person" representedClassName=".Person" syncable="YES">
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="personID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="personID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Rating" representedClassName=".Rating" syncable="YES">
-        <attribute name="average" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="Schedule" representedClassName=".Schedule" syncable="YES">
-        <attribute name="days" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="cast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cast" inverseName="person" inverseEntity="Cast" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="personID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Show" representedClassName=".Show" syncable="YES">
+        <attribute name="averageRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="currentEpisodeLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="genres" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imdb" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nextEpisodeLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="premiered" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="previousEpisodeLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="scheduleDays" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scheduleTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="showID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thetvdb" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tvrage" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="casts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cast" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" syncable="YES"/>
-        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" syncable="YES"/>
-        <relationship name="external" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Externals" syncable="YES"/>
-        <relationship name="link" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShowLinks" syncable="YES"/>
-        <relationship name="network" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Network" syncable="YES"/>
-        <relationship name="rating" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rating" syncable="YES"/>
-        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Schedule" syncable="YES"/>
-    </entity>
-    <entity name="ShowLinks" representedClassName=".ShowLinks" syncable="YES">
-        <attribute name="nextEpisodeLink" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="previousEpisodeLink" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="showLink" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="casts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cast" inverseName="show" inverseEntity="Cast" syncable="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="show" inverseEntity="Episode" syncable="YES"/>
+        <relationship name="network" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Network" inverseName="show" inverseEntity="Network" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="showID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Cast" positionX="-81" positionY="-81" width="128" height="75"/>
-        <element name="Character" positionX="-54" positionY="-54" width="128" height="105"/>
-        <element name="Country" positionX="18" positionY="90" width="128" height="88"/>
-        <element name="Episode" positionX="-270" positionY="-126" width="128" height="210"/>
-        <element name="Externals" positionX="0" positionY="45" width="128" height="88"/>
-        <element name="Network" positionX="45" positionY="90" width="128" height="90"/>
-        <element name="Person" positionX="-63" positionY="-63" width="128" height="105"/>
-        <element name="Rating" positionX="27" positionY="72" width="128" height="58"/>
-        <element name="Schedule" positionX="9" positionY="54" width="128" height="73"/>
-        <element name="Show" positionX="-18" positionY="-261" width="128" height="315"/>
-        <element name="ShowLinks" positionX="9" positionY="54" width="128" height="88"/>
+        <element name="Cast" positionX="-81" positionY="-81" width="128" height="90"/>
+        <element name="Character" positionX="-54" positionY="-54" width="128" height="120"/>
+        <element name="Episode" positionX="-270" positionY="-126" width="128" height="225"/>
+        <element name="Network" positionX="45" positionY="90" width="128" height="135"/>
+        <element name="Person" positionX="-63" positionY="-63" width="128" height="120"/>
+        <element name="Show" positionX="-18" positionY="-261" width="128" height="390"/>
     </elements>
 </model>

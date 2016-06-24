@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NEShowTVC: CDTableViewController {
     // MARK: - INITIALIZATION
@@ -24,13 +25,56 @@ class NEShowTVC: CDTableViewController {
     
     var dropViewLabel: UILabel?
     var dropView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = true
         
+        self.title = "All Shows"
+        setUpSearcBar()
+        setUpDropView()
+        NERequest.getAllShow { (shows, errorMessage) in
+            dispatch_async(dispatch_get_main_queue(), { 
+                if let _ = shows {
+                    for show in shows! {
+                        Show.newInstance(show, context: CDHelper.shared.context)
+                    }
+                    CDHelper.saveSharedContext()
+                    self.performFetch()
+                }
+            })
+        }
+
+
+    }
+    
+    func setUpSearcBar(){
+        let navImageView = UIImageView(image: UIImage(named: "brand"))
+        self.navigationItem.titleView = navImageView
+        let button = UIButton(type: .Custom)
+        button.setImage(UIImage(named: "search"), forState: .Normal)
+        button.addTarget(self, action: #selector(CDTableViewController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        self.searchButtton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = self.searchButtton
+        //        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        //        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        self.searchController = UISearchController(searchResultsController:  nil)
+        self.configureSearch()
+        self.definesPresentationContext = true
+    }
+    
+    func setUpDropView(){
         dropView = UIView(frame: CGRect(x: 0, y: 64, width: self.view.frame.size.width, height: 44))
         dropView?.backgroundColor = UIColor.whiteColor()
         let searchImageView = UIImageView(frame: CGRect(x: 8, y: 7, width: 30, height: 30))
-            searchImageView.image = UIImage(named: "searchBlue")
+        searchImageView.image = UIImage(named: "searchBlue")
         dropViewLabel = UILabel(frame: CGRect(x: 42, y: 13, width: self.view.frame.size.width-45, height: 18))
         dropViewLabel?.numberOfLines = 0
         dropViewLabel?.font = UIFont.systemFontOfSize(15)
@@ -44,43 +88,31 @@ class NEShowTVC: CDTableViewController {
         tgr.numberOfTapsRequired = 1
         dropView?.addGestureRecognizer(tgr)
         self.navigationController?.view.addSubview(dropView!)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = true
-        let navImageView = UIImageView(image: UIImage(named: "brand"))
-        self.navigationItem.titleView = navImageView
-        let button = UIButton(type: .Custom)
-        button.setImage(UIImage(named: "search"), forState: .Normal)
-        button.addTarget(self, action: #selector(CDTableViewController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.layer.cornerRadius = 15
-        button.clipsToBounds = true
-        self.searchButtton = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = self.searchButtton
-//        let appDomain = NSBundle.mainBundle().bundleIdentifier!
-//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
-        self.searchController = UISearchController(searchResultsController:  nil)
-        self.configureSearch()
-        self.definesPresentationContext = true
-        self.title = "All Shows"
-        hideKeyboardWhenBackgroundIsTapped()
-//        NETodayEpisodesAPI.getAllShow(context) 
-
     }
     
     func dropViewTapped(recognizer:UITapGestureRecognizer) {
         SwiftSpinner.show("Loading...")
         let searchText = self.searchController?.searchBar.text
         let formattedText = searchText?.stringByReplacingOccurrencesOfString(" ", withString: "-")
-        NERequest.searchForShowsWithName(formattedText!, onCompletion: { (success, error) in
-            if success == true {
-               let predicate = NSPredicate(format: "name contains[cd] %@",searchText!)
-               self.reloadFRC(predicate)
-                 SwiftSpinner.hide()
-            }
-        })
+        if let text = formattedText {
+            NERequest.searchForShowsWithName(text, completionHandler: { (shows, errorMessage) in
+                dispatch_async(dispatch_get_main_queue(), { 
+                    if let _ = shows {
+                        for show in shows! {
+                            if let showDictionary = show as? [String:AnyObject] {
+                                if let showDict = showDictionary["show"] as? [String:AnyObject] {
+                                    Show.newInstance(showDict, context: CDHelper.shared.context)
+                                }
+                            }
+                        }
+                        CDHelper.saveSharedContext()
+                        let predicate = NSPredicate(format: "name contains[cd] %@",searchText!)
+                        self.reloadFRC(predicate)
+                        SwiftSpinner.hide()
+                    }
+                })
+            })
+        }
     }
     
     func hideKeyboard () {
@@ -98,15 +130,18 @@ class NEShowTVC: CDTableViewController {
         super.viewDidAppear(animated)
         self.performFetch()
     }
-    override func viewWillAppear(animated: Bool) {
-
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         self.hideDropView()
     }
+    
+    override func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        super.searchBarCancelButtonClicked(searchBar)
+        self.hideDropView()
+    }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        self.dropViewLabel?.text = "Can't find \(searchText)? Search here."
+        self.dropViewLabel?.text = "Can't find \(searchText)? Tap here."
         if self.dropView?.alpha == 0 {
             self.unHideDropView()
         }
@@ -127,21 +162,40 @@ class NEShowTVC: CDTableViewController {
         }else {print("ERROR getting item in \(#function)")}
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if isSearching == true {
+            self.searchController?.searchBar.endEditing(true)
+            isSearching = false
+            return
+        }
+        let show = frc.objectAtIndexPath(indexPath) as? Show
+        let showStoryboard = UIStoryboard(name: "Show", bundle: nil)
+        let targetVC = showStoryboard.instantiateViewControllerWithIdentifier("NEShowDetailsVC") as? NEShowDetailsVC
+        targetVC?.show = show
+        targetVC?.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(targetVC!, animated: true)
+    }
+    
     func addFavorite(sender:UIButton) {
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let show = frc.objectAtIndexPath(indexPath) as? Show
-        
-        let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show!.showID!)
-        if (item != nil) {
-        CDHelper.shared.arrayOfFavoriteID.removeAtIndex(CDHelper.shared.arrayOfFavoriteID.indexOf((show?.showID!)!)!)
-            CDHelper.shared.favoriteShows.removeAtIndex(CDHelper.shared.favoriteShows.indexOf(show!)!)
-        }else {
-            CDHelper.shared.arrayOfFavoriteID.append((show?.showID!)!)
-            CDHelper.shared.favoriteShows.append(show!)
+        guard let showID = show?.showID else {
+            return
         }
-        NSUserDefaults.standardUserDefaults().setObject(CDHelper.shared.arrayOfFavoriteID, forKey: "NEFavoriteShows")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.tableView.reloadData()
+        print(show!.isFavorite)
+            if show?.isFavorite == true {
+                show?.isFavorite = false
+                let index = CDHelper.shared.arrayOfFavoriteIDs.indexOf(showID)
+                if let idx = index {
+                    CDHelper.shared.arrayOfFavoriteIDs.removeAtIndex(idx)
+                }
+            }else {
+                show?.isFavorite = true
+                CDHelper.shared.arrayOfFavoriteIDs.append(showID)
+            }
+        CDHelper.setFavoritesToUserDefaults()
+        CDHelper.saveSharedContext()
+        tableView.reloadData()
     }
     
     @IBAction func onDropViewTapped(sender: AnyObject) {
@@ -174,3 +228,23 @@ class NEShowTVC: CDTableViewController {
         self.navigationController?.pushViewController(targetVC!, animated: true)
     }
 }
+
+//        hideKeyboardWhenBackgroundIsTapped()
+//let dateSinceLastUpdate = NSUserDefaults.standardUserDefaults().objectForKey("dateSinceLastUpdate") as? NSDate
+//if let lastUpdate = dateSinceLastUpdate {
+//    let secondsSinceUpdate = Int(NSDate().timeIntervalSinceDate(lastUpdate))
+//    if secondsSinceUpdate > 259200  {
+//        NERequest.getAllShow({ (success, error) in
+//            if success == true {
+//                NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "dateSinceLastUpdate")
+//            }
+//        })
+//    }
+//}else {
+//    NERequest.getAllShow({ (success, error) in
+//        if success == true {
+//            NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "dateSinceLastUpdate")
+//            NSUserDefaults.standardUserDefaults().synchronize()
+//        }
+//    })
+//}

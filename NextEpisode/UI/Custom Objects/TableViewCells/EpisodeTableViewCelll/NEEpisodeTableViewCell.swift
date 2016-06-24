@@ -48,7 +48,7 @@ class NEEpisodeTableViewCell: UITableViewCell {
         airtimeLabel.text = "Time: \(airtime)"
         
 //
-        summaryLabel.text = episode.summary!.isEmpty ? "No summary": episode.summary
+        summaryLabel.text = episode.summary!.isEmpty ? "No summary": CDHelper.formatString(episode.summary!)
         seasonLabel.text = "Season: \(episode.season!)"
 //        if let path = episode.show?.image {
 //            coverImageView.kf_setImageWithURL(NSURL(string: path)!)

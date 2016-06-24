@@ -1,9 +1,9 @@
 //
 //  CDTableViewController.swift
-//  Groceries
+//  NextEpisode
 //
-//  Created by Tim Roadley on 2/10/2015.
-//  Copyright © 2015 Tim Roadley. All rights reserved.
+//  Created by Andela on 5/4/16.
+//  Copyright © 2016 Andela. All rights reserved.
 //
 
 import UIKit
@@ -97,6 +97,7 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: - VIEW
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         SwiftSpinner.show("Loading...")
         self.isSearching = false
         // Force fetch when notified of significant data changes
@@ -139,6 +140,9 @@ class CDTableViewController: UITableViewController, NSFetchedResultsControllerDe
             self.configureCell(cell!, atIndexPath: indexPath)
             return cell!
         }
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
         return self.frc.sectionForSectionIndexTitle(title, atIndex: index)

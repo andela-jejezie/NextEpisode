@@ -13,9 +13,11 @@ class NEWebViewVC: NEGenericVC, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     var allowLoading = true
     var urlString:String!
+    var displayTitle:String!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        title = displayTitle
         self.webView.delegate = self
         let url:NSURL = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)

@@ -12,11 +12,12 @@ import CoreData
 class NERequest: NSObject {
     
     typealias showsResponse = (Bool?, NSError?)->Void
-    class func searchForShowsWithName(name:String, onCompletion:showsResponse) {
+    
+    class func searchForShowsWithName(name:String, completionHandler:((shows:[AnyObject]?, errorMessage:String?) -> Void)) {
         let endpoint = Constants.baseURL + "search/shows?q=\(name)"
         guard let url = NSURL(string: endpoint) else {
             print("failed to create url",#function)
-            onCompletion(false, nil)
+            completionHandler(shows: nil, errorMessage: "Error occurred. Please check your internet connection")
             return
         }
         let request = NSURLRequest(URL: url)
@@ -24,49 +25,131 @@ class NERequest: NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             guard let responseData = data else {
                 print("didn't get data", #function)
-                onCompletion(false, nil)
+                completionHandler(shows: nil, errorMessage: "Please try again")
                 return
             }
             guard error == nil else {
                 print("an error occured \(error?.localizedDescription)")
-                onCompletion(false, nil)
+                completionHandler(shows: nil, errorMessage: error?.localizedDescription)
                 return
             }
-            let context = CDHelper.shared.context
             do {
                 if let showJson = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? [AnyObject] {
-                    for showObject in showJson {
-                        if let showDictionary = showObject as? [String:AnyObject] {
-                            if let showDict = showDictionary["show"] as? [String:AnyObject] {
-                                deleteIfAlreadyExist(String(showDict["id"]!), context: context)
-                              Show.newInstance(showDict, context: context)
-                            }
-                        }
-                    }
-                    CDHelper.saveSharedContext()
-                    onCompletion(true, error)
+                    completionHandler(shows: showJson, errorMessage: nil)
                 }
             }catch {
                
             }
-            onCompletion(true, error)
         }
         task.resume()
     }
     
-    class func deleteIfAlreadyExist(showID:String, context:NSManagedObjectContext){
-        let fetchRequest = NSFetchRequest(entityName: "Show")
-        fetchRequest.predicate = NSPredicate(format:"showID == %@",showID)
-        do {
-            let shows = try context.executeFetchRequest(fetchRequest) as? [Show]
-            if shows?.count>0 {
-                context.deleteObject(shows![0] as Show)
-                CDHelper.saveSharedContext()
+    class func getAllShow(completionHandler:((shows:[[String: AnyObject]]?, errorMessage:String?) -> Void)){
+        let endpoint = Constants.baseURL + "shows"
+        guard let url = NSURL(string: endpoint) else {
+            completionHandler(shows: nil, errorMessage: "Error occurred. Please check your internet connection")
+            return
+        }
+        let urlRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error) in
+            guard let responseData = data else {
+                completionHandler(shows: nil, errorMessage: "Please try again")
+                print("Error: did not receive data")
+                return
             }
-        }catch {
+            guard error == nil else {
+                completionHandler(shows: nil, errorMessage: error?.localizedDescription)
+                print("Error fetching data: \(error)")
+                return
+            }
+            do {
+                if let series = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? [[String: AnyObject]] {
+                    completionHandler(shows: series, errorMessage: nil)
+                }
+            } catch {
+                completionHandler(shows: nil, errorMessage: "\(error)")
+                print("Error deserializing JSON: \(error)")
+            }
+        }
+        task.resume()
+    }
+    
+
+    class func getCastsForShow(showID:String, completionHandler:((casts:[AnyObject]?, errorMessage:String?) -> Void)) {
+        let endpoint = Constants.baseURL + "shows/\(showID)/cast"
+        guard let url = NSURL(string: endpoint) else {
+            print("Error: cannot create URL")
+            completionHandler(casts: nil, errorMessage: "Error occurred. Please check your internet connection")
+            return
+        }
+        let urlRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error) in
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                completionHandler(casts: nil, errorMessage: "Please try again")
+                return
+            }
+            guard error == nil else {
+                print("Error fetching data: \(error)")
+                completionHandler(casts: nil, errorMessage: error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let arrayObjects = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? [AnyObject] {
+                    completionHandler(casts: arrayObjects, errorMessage: nil)
+                }
+                
+            } catch {
+                print("Error deserializing JSON: \(error)")
+                completionHandler(casts: nil, errorMessage: "Please try again")
+            }
             
         }
+        task.resume()
     }
+    
+    class func getEpisodes(showID:String, completionHandler:((episodes:[AnyObject]?, errorMessage:String?) -> Void)) {
+        let endpoint = Constants.baseURL + "shows/\(showID)/episodes"
+        guard let url = NSURL(string: endpoint) else {
+            print("Error: cannot create URL")
+            completionHandler(episodes: nil, errorMessage: "Error occurred. Please check your internet connection")
+            return
+        }
+        let urlRequest = NSURLRequest(URL: url)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error) in
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                completionHandler(episodes: nil, errorMessage: "Please try again")
+                return
+            }
+            guard error == nil else {
+                print("Error fetching data: \(error)")
+                completionHandler(episodes: nil, errorMessage: error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let arrayObjects = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? [AnyObject] {
+                    completionHandler(episodes: arrayObjects, errorMessage: nil)
+                }
+                
+            } catch {
+                print("Error deserializing JSON: \(error)")
+                completionHandler(episodes: nil, errorMessage: "Please try again")
+            }
+            
+        }
+        task.resume()
+    }
+    
+
 }
 
  

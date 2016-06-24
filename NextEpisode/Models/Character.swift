@@ -2,7 +2,7 @@
 //  Character.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/5/16.
+//  Created by Andela on 6/19/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 
@@ -11,8 +11,8 @@ import CoreData
 
 
 class Character: NSManagedObject {
-    
-    // Insert code here to add functionality to your managed object subclass
+
+// Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
                            context: NSManagedObjectContext) -> Character {
         let character = NSEntityDescription.insertNewObjectForEntityForName("Character",

@@ -32,29 +32,34 @@ class NEShowTableViewCell: UITableViewCell {
         coverImageView.image = UIImage(named: "images")
         
             nameLabel.text = show.name
-        guard let rating = show.rating?.average where show.rating?.average != nil else {
+        guard let rating = show.averageRating where show.averageRating != nil else {
             ratingLabel.text = "Rating: not available"
             return
         }
         ratingLabel.text = "Rating: \(rating)/10"
         
-        summaryLabel.text = show.summary!.isEmpty ? "No summary": show.summary
+        if let summary = show.summary {
+            summaryLabel.text = CDHelper.formatString(summary)
+        }else {
+            summaryLabel.text = "No summary"
+        }
+        
+//        summaryLabel.text = show.summary!.isEmpty ? "No summary": CDHelper.formatString(show.summary!)
         if let path = show.image {
             let imageView = UIImageView()
             imageView.kf_setImageWithURL(NSURL(string: path)!, placeholderImage: UIImage(named: "images"), optionsInfo: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
                 if let showImage = image {
                     self.coverImageView.image = CDHelper.resizeImage(showImage, newWidth: self.coverImageView.frame.size.width)
                 }else {
-                    self.coverImageView.image = UIImage(named: "user")
+                    self.coverImageView.image = UIImage(named: "images")
                 }
                 
             })
         }else {
-            self.coverImageView.image = UIImage(named: "user")
+            self.coverImageView.image = UIImage(named: "image")
         }
         
-        let item = CDHelper.shared.arrayOfFavoriteID.indexOf(show.showID!)
-        if (item != nil) {
+        if (show.isFavorite == true) {
             favoriteImageView.image = UIImage(named: "HeartsFilled")
         }else {
            favoriteImageView.image = UIImage(named: "Hearts") 

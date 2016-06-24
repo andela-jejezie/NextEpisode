@@ -2,7 +2,7 @@
 //  Episode.swift
 //  NextEpisode
 //
-//  Created by Andela on 5/5/16.
+//  Created by Andela on 6/19/16.
 //  Copyright © 2016 Andela. All rights reserved.
 //
 
@@ -11,10 +11,10 @@ import CoreData
 
 
 class Episode: NSManagedObject {
-    
-    // Insert code here to add functionality to your managed object subclass
+
+// Insert code here to add functionality to your managed object subclass
     class func newInstance(dictionary: [String:AnyObject] ,
-                           context: NSManagedObjectContext, showID:String) -> Episode {
+                           context: NSManagedObjectContext, show:Show) -> Episode {
         let episode = NSEntityDescription.insertNewObjectForEntityForName("Episode",
                                                                           inManagedObjectContext: context) as! Episode
         if let episdeNumber = dictionary["number"] as? NSNumber {
@@ -49,8 +49,7 @@ class Episode: NSManagedObject {
         if let summary = dictionary["summary"] as? String {
             episode.summary = CDHelper.formatString(summary)
         }
-        episode.showID = NSNumber(long: Int(showID)!)
+        episode.show = show
         return episode
     }
-    
 }

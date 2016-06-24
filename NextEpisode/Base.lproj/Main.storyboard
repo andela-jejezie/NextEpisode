@@ -66,6 +66,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="YwR-v1-g7i"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSm-qY-qaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -115,6 +116,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JlM-gd-HZV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Shows" image="tv30" id="Gyt-8K-sth"/>
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P22-is-ixO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

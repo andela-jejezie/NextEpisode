@@ -6,14 +6,6 @@
 //  Copyright © 2016 Andela. All rights reserved.
 //
 
-//
-//  CDHelper.swift
-//  Groceries
-//
-//  Created by Tim Roadley on 29/09/2015.
-//  Copyright © 2015 Tim Roadley. All rights reserved.
-//
-
 import Foundation
 import CoreData
 import UIKit
@@ -26,8 +18,7 @@ class CDHelper : NSObject  {
         return _sharedCDHelper
     }
     
-    var arrayOfFavoriteID = [NSNumber]()
-    var favoriteShows = [Show]()
+    var arrayOfFavoriteIDs = [NSNumber]()
     
     // MARK: - PATHS
     lazy var storesDirectory: NSURL? = {
@@ -36,7 +27,7 @@ class CDHelper : NSObject  {
         return urls[urls.count-1]
     }()
     lazy var localStoreURL: NSURL? = {
-        if let url = self.storesDirectory?.URLByAppendingPathComponent("LocalStore.sqlite") {
+        if let url = self.storesDirectory?.URLByAppendingPathComponent("NextEpisode.sqlite") {
             print("localStoreURL = \(url)")
             return url
         }
@@ -57,6 +48,7 @@ class CDHelper : NSObject  {
     lazy var context: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType:.MainQueueConcurrencyType)
         moc.persistentStoreCoordinator = self.coordinator
+        moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return moc
     }()
     
@@ -115,7 +107,11 @@ class CDHelper : NSObject  {
     class func saveSharedContext() {
         save(shared.context)
     }
-
+    
+    class func setFavoritesToUserDefaults() {
+        NSUserDefaults.standardUserDefaults().setObject(CDHelper.shared.arrayOfFavoriteIDs, forKey: "NEFavorites")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
     
     class func stringToDate(date:String)->NSDate {
         let dateFormatter = NSDateFormatter()
@@ -128,20 +124,10 @@ class CDHelper : NSObject  {
         return dateFormatter.stringFromDate(date)
     }
     class func formatString(text:String)->String {
-       return text.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "").stringByReplacingOccurrencesOfString("<em>", withString: "").stringByReplacingOccurrencesOfString("</em>", withString: "").stringByReplacingOccurrencesOfString("<i>", withString: "").stringByReplacingOccurrencesOfString("</strong>", withString: "").stringByReplacingOccurrencesOfString("<strong>", withString: "").stringByReplacingOccurrencesOfString("<br>", withString: "").stringByReplacingOccurrencesOfString("</br>", withString: "")
+       return text.stringByReplacingOccurrencesOfString("<p>", withString: "").stringByReplacingOccurrencesOfString("</p>", withString: "").stringByReplacingOccurrencesOfString("<em>", withString: "").stringByReplacingOccurrencesOfString("</em>", withString: "").stringByReplacingOccurrencesOfString("<i>", withString: "").stringByReplacingOccurrencesOfString("</strong>", withString: "").stringByReplacingOccurrencesOfString("<strong>", withString: "").stringByReplacingOccurrencesOfString("<br>", withString: "").stringByReplacingOccurrencesOfString("</br>", withString: "").stringByReplacingOccurrencesOfString("</i>", withString: "")
     }
     
     class func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-//        float oldWidth = sourceImage.size.width;
-//        float scaleFactor = i_width / oldWidth;
-//        
-//        float newHeight = sourceImage.size.height * scaleFactor;
-//        float newWidth = oldWidth * scaleFactor;
-//        
-//        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
-//        [sourceImage drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
-//        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
         let oldWidth = image.size.width
         let scaleFactor = newWidth/oldWidth
         let newHeight = image.size.height * scaleFactor
